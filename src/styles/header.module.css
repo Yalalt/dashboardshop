@@ -1,0 +1,12 @@
+.mainBg {
+  background-color: teal;
+  opacity: 0.7;
+  color: #fff;
+  text-transform: uppercase;
+}
+.headerItems {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  padding: 16px 20px;
+}

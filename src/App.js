@@ -1,4 +1,4 @@
-import Header from "./component/Header";
+import Header from "./component/Header/Header";
 import SideMenu from "./component/SideMenu";
 import { Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";

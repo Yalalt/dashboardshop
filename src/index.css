@@ -1,5 +1,14 @@
+:root {
+  --container-3x: 0 30px;
+  --blue-color: #003585;
+  --bluelight-color: #0046af;
+  --green-color: #a7f65c;
+  --silver-primary: #d2d2d2;
+  --silver-secondary: #f5f5f5;
+}
 body {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background-color: var(--silver-secondary);
 }

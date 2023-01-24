@@ -1,18 +1,36 @@
 import React from "react";
+import { NavLink, Outlet } from "react-router-dom";
 
-import style from "./sidebar.module.css";
+import "../style/sidebar.css";
 
 const Sidebar = () => {
   return (
-    <div className={style.mainBg}>
-      <ul>
-        <li>Хянах самбар</li>
-        <li>Бүтээгдэхүүнүүд</li>
-        <li>Захиалгууд</li>
-        <li>Хэрэглэгчид</li>
-        <li>Модератор</li>
-        <li>Тохиргоо</li>
-      </ul>
+    <div className="sidebar-container">
+      <div className="sidebar-menubar">
+        <ul className="sidebar-navbar">
+          <NavLink to="controlpanel">
+            <li>Хянах самбар</li>
+          </NavLink>
+          <NavLink to="products">
+            <li>Бүтээгдэхүүнүүд</li>
+          </NavLink>
+          <NavLink to="orders">
+            <li>Захиалгууд</li>
+          </NavLink>
+          <NavLink to="users">
+            <li>Хэрэглэгчид</li>
+          </NavLink>
+          <NavLink to="moderator">
+            <li>Модератор</li>
+          </NavLink>
+          <NavLink to="settings">
+            <li>Тохиргоо</li>
+          </NavLink>
+        </ul>
+      </div>
+      <main className="sidebar-mainBox">
+        <Outlet />
+      </main>
     </div>
   );
 };

@@ -1,17 +1,24 @@
 import React from "react";
 
-import style from "./header.module.css";
+import "../style/header.css";
 
 const Header = () => {
   return (
-    <div className={style.mainBg}>
-      <nav className={style.headerItems}>
-        <div>Logo</div>
-        <input type="text" name="searchBar" />
-        <button type="button" name="loginBtn">
-          Login
-        </button>
-      </nav>
+    <div className="header-container">
+      <div className="header-navbar">
+        <nav className="headerItems-d">
+          <div>Logo</div>
+          <input type="text" name="searchBar" />
+          <div className="header-loginGroup">
+            <button type="button" name="loginBtn">
+              нэвтрэх
+            </button>
+            <button type="button" name="loginBtn">
+              Гарах
+            </button>
+          </div>
+        </nav>
+      </div>
     </div>
   );
 };

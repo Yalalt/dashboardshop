@@ -1,3 +1,36 @@
-.mainBg {
-  background-color: bisque;
+.sidebar-container {
+  padding: var(--container-3x);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.sidebar-menubar {
+  width: 15%;
+  height: 100vh;
+  background-color: var(--silver-primary);
+}
+.sidebar-navbar {
+  display: flex;
+  flex-flow: column;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.sidebar-navbar li {
+  margin: 10px 0;
+  border: none;
+  background-color: var(--blue-color);
+  padding: 8px;
+}
+.sidebar-navbar li:hover {
+  background-color: var(--bluelight-color);
+}
+.sidebar-navbar a {
+  color: white;
+  text-decoration: none;
+}
+.sidebar-mainBox {
+  width: 85%;
+  height: 100vh;
+  padding: 0 30px;
 }

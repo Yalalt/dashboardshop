@@ -1,9 +1,9 @@
 import React from "react";
-import style from "./home.module.css";
+import "../../style/controlpanel.css";
 
 const ControlPanel = () => {
   return (
-    <div className={style.ControlPanelBg}>
+    <div className="controlPanel-bgColor">
       <p>ControlPanel page</p>
     </div>
   );

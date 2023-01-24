@@ -7,7 +7,7 @@
 .sidebar-menubar {
   width: 15%;
   height: 100vh;
-  background-color: var(--silver-primary);
+  background-color: #fff;
 }
 .sidebar-navbar {
   display: flex;
@@ -19,14 +19,14 @@
 .sidebar-navbar li {
   margin: 10px 0;
   border: none;
-  background-color: var(--blue-color);
   padding: 8px;
 }
 .sidebar-navbar li:hover {
   background-color: var(--bluelight-color);
+  color: #fff;
 }
 .sidebar-navbar a {
-  color: white;
+  color: #333;
   text-decoration: none;
 }
 .sidebar-mainBox {

@@ -1,3 +1,29 @@
 .controlPanel-bgColor {
-  background-color: lightgray;
+  background-color: var(--silver-secondary);
+  height: 100vh;
+}
+.lastSold {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 8px;
+  padding: 20px;
+}
+.controlPanel-cardBody {
+  width: 200px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.controlPanel-cardImage {
+  width: 100%;
+}
+.controlPanel-cardImage img {
+  width: 100%;
+}
+
+.controlPanel-cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
 }

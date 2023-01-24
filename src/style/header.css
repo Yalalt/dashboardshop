@@ -1,4 +1,5 @@
 .header-container {
+  background-color: #fff;
   padding: var(--container-3x);
 }
 .header-navbar {

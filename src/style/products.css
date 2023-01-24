@@ -1,6 +1,71 @@
-.products-container {
-  margin: 0 30px;
-}
 .products-bgColor {
-  background-color: azure;
+  background-color: var(--silver-secondary);
+  height: 100vh;
+}
+.productsView {
+  background-color: #fff;
+  border-radius: 10px;
+  margin: 8px;
+  padding: 20px;
+}
+.products-cardBody {
+  width: 200px;
+  padding: 16px;
+  text-align: center;
+  border: 1px solid lightgray;
+  border-radius: 5px;
+}
+.products-cardImage {
+  width: 100%;
+}
+.products-cardImage img {
+  width: 100%;
+}
+
+.products-cardContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+.products-controlBar-filter {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+table {
+  margin-top: 16px;
+  width: 100%;
+}
+thead {
+  background-color: #E0E0E0;
+  line-height: 2;
+}
+tbody {
+  background-color: #fff;
+}
+td {
+  font-size: 14px;
+  text-align: center;
+  line-height: 2;
+}
+.productName {
+  width: 80px;
+}
+.productsCategory-table {
+  padding: 3px 10px;
+  background-color: var(--blue-color);
+  color: #fff;
+  border-radius: 3px;
+}
+.productsBtn-table {
+  width: 50px;
+  cursor: pointer;
+}
+.products-controlBar-addBtn {
+  margin-bottom: 10px;
+}
+.products-controlBar-addBtn button {
+  padding: 8px 16px;
+  background-color: var(--blue-color);
+  color: #fff;
 }

@@ -1,8 +1,8 @@
 import React from "react";
 
-import style from "../sidemenu.module.css";
+import style from "./sidebar.module.css";
 
-const SideMenu = () => {
+const Sidebar = () => {
   return (
     <div className={style.mainBg}>
       <ul>
@@ -16,4 +16,4 @@ const SideMenu = () => {
     </div>
   );
 };
-export default SideMenu;
+export default Sidebar;

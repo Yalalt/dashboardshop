@@ -1,15 +1,19 @@
 import React, { useState, useEffect } from "react";
-
-import productsData from "../../utils/db/db.json";
+import { Outlet } from "react-router-dom";
+import Button from "react-bootstrap/Button";
+import axios from "axios";
 import "../../style/products.css";
-import { Link, Outlet, Route } from "react-router-dom";
 
 const Products = () => {
-  let [products, setProducts] = useState([productsData.products]);
+  let [products, setProducts] = useState([]);
 
   useEffect(() => {
-    console.log(products[0]);
-  }, [products]);
+    axios
+      .get("http://localhost:3007/products")
+      .then((response) => setProducts(response.data));
+  }, []);
+
+  console.log(products);
 
   return (
     <React.Fragment>
@@ -20,9 +24,7 @@ const Products = () => {
 
         <div className="products-controlBar">
           <div className="products-controlBar-addBtn">
-            <Link to="addproduct">
-              <button type="button">+ Бараа нэмэх</button>
-            </Link>
+            <Button variant="primary">+ Бараа нэмэх</Button>
           </div>
           <div className="products-controlBar-filter">
             <div>
@@ -43,7 +45,7 @@ const Products = () => {
             </div>
           </div>
         </div>
-        
+
         <table>
           <thead>
             <th>Зураг</th>
@@ -55,10 +57,10 @@ const Products = () => {
             <th>:</th>
           </thead>
           <tbody>
-            {products[0].map((product) => {
+            {products.map((product, ind) => {
               return (
                 <>
-                  <tr>
+                  <tr key={ind}>
                     <td></td>
                     <td>
                       <span>{product.name}</span>

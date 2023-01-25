@@ -1,22 +1,27 @@
 import React, { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
-import Button from "react-bootstrap/Button";
 import axios from "axios";
 import "../../style/products.css";
 
 const Products = () => {
   let [products, setProducts] = useState([]);
 
+  const getAllProducts = () => {
+    try {
+      axios
+        .get("http://localhost:3007/products")
+        .then((response) => setProducts(response.data));
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   useEffect(() => {
-    axios
-      .get("http://localhost:3007/products")
-      .then((response) => setProducts(response.data));
+    getAllProducts();
   }, []);
 
-  console.log(products);
-
   return (
-    <React.Fragment>
+    <>
       <div className="products-bgColor">
         <div>
           <p>Бүтээгдэхүүн</p>
@@ -24,7 +29,7 @@ const Products = () => {
 
         <div className="products-controlBar">
           <div className="products-controlBar-addBtn">
-            <Button variant="primary">+ Бараа нэмэх</Button>
+            <button variant="primary">+ Бараа нэмэх</button>
           </div>
           <div className="products-controlBar-filter">
             <div>
@@ -48,47 +53,37 @@ const Products = () => {
 
         <table>
           <thead>
-            <th>Зураг</th>
-            <th>Барааны нэр</th>
-            <th>Үнэ</th>
-            <th>Үлдэгдэл</th>
-            <th>Хямдрал %</th>
-            <th>Категори</th>
-            <th>:</th>
+            <tr>
+              <th>Зураг</th>
+              <th>Барааны нэр</th>
+              <th>Үнэ</th>
+              <th>Үлдэгдэл</th>
+              <th>Хямдрал %</th>
+              <th>Категори</th>
+              <th>:</th>
+            </tr>
           </thead>
           <tbody>
-            {products.map((product, ind) => {
-              return (
-                <>
-                  <tr key={ind}>
-                    <td></td>
-                    <td>
-                      <span>{product.name}</span>
-                    </td>
-                    <td>
-                      <span>{product.price}</span>
-                    </td>
-                    <td>
-                      <span>{product.stock}</span>
-                    </td>
-                    <td>
-                      <span>{product.sale}</span>
-                    </td>
-                    <td>
-                      <span className="productsCategory-table">
-                        {product.category}
-                      </span>
-                    </td>
-                    <td className="productsBtn-table ">:</td>
-                  </tr>
-                </>
-              );
-            })}
+            {products &&
+              products.map((product, index) => (
+                <tr key={index}>
+                  <td></td>
+                  <td>{product.name}</td>
+                  <td>{product.price}</td>
+                  <td>{product.stock}</td>
+                  <td>{product.sale}</td>
+                  <td>
+                    <span className="productsCategory-table">
+                      {product.category}
+                    </span>
+                  </td>
+                  <td className="productsBtn-table ">:</td>
+                </tr>
+              ))}
           </tbody>
         </table>
-        <Outlet />
       </div>
-    </React.Fragment>
+    </>
   );
 };
 export default Products;

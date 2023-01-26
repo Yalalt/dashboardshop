@@ -1,12 +1,11 @@
 import { useState } from "react";
 
-const Product = ({ index, product }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const [menuModalOpen, setMenuModalOpen] = useState(false);
-
+const Product = ({ index, product, setMenuModalOpen }) => {
   return (
     <tr key={index}>
-      <td>{index}</td>
+      <td className="productItem">
+        <img src={product.image} alt={product.name} />
+      </td>
       <td>{product.name}</td>
       <td>{product.price}</td>
       <td>{product.stock}</td>
@@ -14,7 +13,9 @@ const Product = ({ index, product }) => {
       <td>
         <span className="productsCategory-table">{product.category}</span>
       </td>
-      <td className="productsBtn-table">:</td>
+      <td className="productsBtn-table">
+        <button onClick={setMenuModalOpen}>:</button>
+      </td>
     </tr>
   );
 };

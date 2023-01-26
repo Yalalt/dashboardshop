@@ -22,6 +22,13 @@
   width: 100%;
 }
 
+.productItem {
+  width: 80px;
+}
+.productItem img {
+  width: 100%;
+}
+
 .products-cardContainer {
   display: flex;
   flex-wrap: wrap;
@@ -57,9 +64,15 @@ td {
   color: #fff;
   border-radius: 3px;
 }
+
 .productsBtn-table {
   width: 50px;
+}
+.productsBtn-table button {
   cursor: pointer;
+  background: transparent;
+  border: 1px solid gray;
+  border-radius: 5px;
 }
 .products-controlBar-addBtn {
   margin-bottom: 10px;

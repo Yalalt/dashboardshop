@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import { Outlet } from "react-router-dom";
 import axios from "axios";
 import "../../style/products.css";
+import Product from "./Product";
 
 const Products = () => {
   let [products, setProducts] = useState([]);
@@ -66,19 +66,11 @@ const Products = () => {
           <tbody>
             {products &&
               products.map((product, index) => (
-                <tr key={index}>
-                  <td></td>
-                  <td>{product.name}</td>
-                  <td>{product.price}</td>
-                  <td>{product.stock}</td>
-                  <td>{product.sale}</td>
-                  <td>
-                    <span className="productsCategory-table">
-                      {product.category}
-                    </span>
-                  </td>
-                  <td className="productsBtn-table ">:</td>
-                </tr>
+                <Product
+                  key={`prid${index}`}
+                  index={product.pid}
+                  product={product}
+                />
               ))}
           </tbody>
         </table>

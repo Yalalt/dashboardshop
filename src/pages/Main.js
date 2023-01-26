@@ -5,10 +5,9 @@ import Users from "../component/subComponent/Users";
 import Moderator from "../component/subComponent/Moderator";
 import Settings from "../component/subComponent/Settings";
 import ControlPanel from "../component/subComponent/ControlPanel";
+import HeaderLayout from "../component/HeaderLayout";
 
 import { Routes, Route } from "react-router-dom";
-import HeaderLayout from "../component/HeaderLayout";
-import AddProduct from "../component/subComponent/AddProduct";
 
 function Main() {
   return (

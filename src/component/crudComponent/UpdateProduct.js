@@ -1,14 +1,9 @@
-const { useState } = require("react");
+import { useState } from "react";
 
-const AddProduct = () => {
-  let [specFieldNumber, setSpecFieldNumber] = useState(1);
-  let [addProductSpecRows, setAddProductSpecRows] = useState([]);
-
-  const addSpecification = () => {};
-
+const UpdateProduct = () => {
   return (
     <div>
-      <p>Бүтээгдэхүүн нэмэх</p>
+      <p>Бүтээгдэхүүн засварлах</p>
       <div className="addProductForm">
         <div className="addProduct-inputGroupRow">
           <div className="addProduct-inputField">
@@ -52,7 +47,7 @@ const AddProduct = () => {
             />
           </div>
         </div>
-        {addProductSpecRows}
+
         <input type="button" onClick={addSpecification}>
           Үзүүлэлт нэмэх
         </input>
@@ -60,3 +55,4 @@ const AddProduct = () => {
     </div>
   );
 };
+export default UpdateProduct;

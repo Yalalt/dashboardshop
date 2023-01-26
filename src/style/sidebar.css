@@ -29,6 +29,9 @@
   color: #333;
   text-decoration: none;
 }
+.sidebar-navbar a:active {
+  background-color: var(--bluelight-color);
+}
 .sidebar-mainBox {
   width: 85%;
   height: 100vh;

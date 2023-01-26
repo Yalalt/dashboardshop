@@ -8,24 +8,24 @@ const Sidebar = () => {
     <div className="sidebar-container">
       <div className="sidebar-menubar">
         <ul className="sidebar-navbar">
-          <NavLink to="controlpanel">
-            <li>Хянах самбар</li>
-          </NavLink>
-          <NavLink to="products">
-            <li>Бүтээгдэхүүнүүд</li>
-          </NavLink>
-          <NavLink to="orders">
-            <li>Захиалгууд</li>
-          </NavLink>
-          <NavLink to="users">
-            <li>Хэрэглэгчид</li>
-          </NavLink>
-          <NavLink to="moderator">
-            <li>Модератор</li>
-          </NavLink>
-          <NavLink to="settings">
-            <li>Тохиргоо</li>
-          </NavLink>
+          <li>
+            <NavLink to="controlpanel">Хянах самбар</NavLink>
+          </li>
+          <li>
+            <NavLink to="products">Бүтээгдэхүүнүүд</NavLink>
+          </li>
+          <li>
+            <NavLink to="orders">Захиалгууд</NavLink>
+          </li>
+          <li>
+            <NavLink to="users">Хэрэглэгчид</NavLink>
+          </li>
+          <li>
+            <NavLink to="moderator">Модератор</NavLink>
+          </li>
+          <li>
+            <NavLink to="settings">Тохиргоо</NavLink>
+          </li>
         </ul>
       </div>
       <main className="sidebar-mainBox">

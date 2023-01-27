@@ -1,0 +1,99 @@
+.updateProd-modalBg {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.updateProd-modalContainer {
+  width: 700px;
+  height: auto;
+  border-radius: 12px;
+  background-color: #fcfcfc;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+}
+
+.updateProd-modalContainer .updateProd-titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.updateProd-modalContainer .updateProd-titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.updateProd-ModalTitle {
+  display: inline-block;
+  text-align: center;
+  margin: 16px 0;
+  font-weight: 200;
+}
+
+.updateProd-ModalBody {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.125rem;
+  text-align: left;
+}
+
+.updateProd-ModalFooter {
+  flex: 20%;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+.updateProd-ModalFooter button {
+  width: 150px;
+  height: 36px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.addProductForm {
+  width: 100%;
+}
+.addProduct-inputGroupRow {
+  display: flex;
+  justify-content: space-between;
+  gap: 30px;
+}
+
+.addProduct-inputField {
+  width: 100%;
+  margin: 10px 0;
+}
+.addProduct-inputField label,
+.addProduct-inputField input {
+  display: block;
+  width: 95%;
+  margin: 10px 0;
+  font-size: 14px;
+}
+.addProduct-inputField input {
+  line-height: 1.5;
+  font-size: 16px;
+  padding-left: 10px;
+}
+.updateProduct-specSubTitle {
+  font-size: 16px;
+  color: gray;
+}

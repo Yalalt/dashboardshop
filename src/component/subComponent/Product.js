@@ -1,6 +1,9 @@
 import { useState } from "react";
+import MenuModal from "./MenuModal";
 
-const Product = ({ index, product, setMenuModalOpen }) => {
+const Product = ({ index, product, openUpdateProductModal }) => {
+  const [menuModalOpen, setMenuModalOpen] = useState(false);
+
   return (
     <tr key={index}>
       <td className="productItem">
@@ -14,7 +17,20 @@ const Product = ({ index, product, setMenuModalOpen }) => {
         <span className="productsCategory-table">{product.category}</span>
       </td>
       <td className="productsBtn-table">
-        <button onClick={setMenuModalOpen}>:</button>
+        {menuModalOpen && (
+          <MenuModal
+            pid={product.pid}
+            setOpenModal={setMenuModalOpen}
+            openUpdateProductModal={openUpdateProductModal}
+          />
+        )}
+        <button
+          onClick={() => {
+            setMenuModalOpen(true);
+          }}
+        >
+          :
+        </button>
       </td>
     </tr>
   );

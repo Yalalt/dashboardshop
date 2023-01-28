@@ -11,8 +11,10 @@
 }
 
 .updateProd-modalContainer {
+  overflow: scroll;
   width: 700px;
   height: auto;
+  max-height: 90vh;
   border-radius: 12px;
   background-color: #fcfcfc;
   box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
@@ -68,27 +70,27 @@
   cursor: pointer;
 }
 
-.addProductForm {
+.updateProductModalForm {
   width: 100%;
 }
-.addProduct-inputGroupRow {
+.updateProduct-inputGroupRow {
   display: flex;
   justify-content: space-between;
   gap: 30px;
 }
 
-.addProduct-inputField {
+.updateProduct-inputField {
   width: 100%;
   margin: 10px 0;
 }
-.addProduct-inputField label,
-.addProduct-inputField input {
+.updateProduct-inputField label,
+.updateProduct-inputField input {
   display: block;
   width: 95%;
   margin: 10px 0;
   font-size: 14px;
 }
-.addProduct-inputField input {
+.updateProduct-inputField input {
   line-height: 1.5;
   font-size: 16px;
   padding-left: 10px;

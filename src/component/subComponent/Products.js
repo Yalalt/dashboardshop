@@ -1,61 +1,48 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
+import React, { useState } from "react";
 import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
-import AddProduct from "../crudComponent/AddProduct";
+import AddProductModal from "../crudComponent/AddProductModal";
 
-const Products = () => {
-  let [products, setProducts] = useState([]);
+const Products = (props) => {
   let [openUpdateModal, setOpenUpdateModal] = useState(false);
   let [openAddModal, setOpenAddModal] = useState(false);
+
   let [selectedProdId, setSelectedProdId] = useState("0");
 
+  const { lists } = props;
+
+  // Display interface controller
   const openUpdateProductModal = (pId) => {
     setOpenUpdateModal(true);
+    setOpenAddModal(false);
     setSelectedProdId(pId);
   };
 
   const openAddProductModal = () => {
     setOpenAddModal(true);
-  }
-
-  const getAllProducts = () => {
-    try {
-      axios
-        .get("http://localhost:3008/products")
-        .then((response) => setProducts(response.data));
-    } catch (error) {
-      console.error(error);
-    }
+    setOpenUpdateModal(false);
   };
 
+  const closeAddProductModal = () => {
+    setOpenAddModal(false);
+  };
 
-
-  useEffect(() => {
-    getAllProducts();
-  }, []);
+  const closeUpdateProductModal = () => {
+    setOpenUpdateModal(false);
+  };
 
   return (
     <div className="products-bgColor">
-      {
-      // openUpdateModal && (
-      //   <UpdateProductModal
-      //     selectedProdId={selectedProdId}
-      //     setOpenUpdateModal={setOpenUpdateModal}
-      //   />
-      // )
-      
-      openAddModal && (
-        <AddProduct />
-      )}
       <div>
         <p>Бүтээгдэхүүн</p>
       </div>
 
       <div className="products-controlBar">
         <div className="products-controlBar-addBtn">
-          <button variant="primary" onClick={openAddProductModal}>+ Бараа нэмэх</button>
+          <button variant="primary" onClick={openAddProductModal}>
+            + Бараа нэмэх
+          </button>
         </div>
         <div className="products-controlBar-filter">
           <div>
@@ -90,8 +77,8 @@ const Products = () => {
           </tr>
         </thead>
         <tbody>
-          {products &&
-            products.map((product, index) => (
+          {lists &&
+            lists.map((product, index) => (
               <Product
                 key={`prid${index}`}
                 index={product.pid}
@@ -101,6 +88,15 @@ const Products = () => {
             ))}
         </tbody>
       </table>
+      {(openUpdateModal ? (
+        <UpdateProductModal
+          selectedProdId={selectedProdId}
+          closeUpdateProductModal={closeUpdateProductModal}
+        />
+      ) : null) ||
+        (openAddModal ? (
+          <AddProductModal closeAddProductModal={closeAddProductModal} />
+        ) : null)}
     </div>
   );
 };

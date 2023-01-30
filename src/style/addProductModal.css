@@ -1,0 +1,144 @@
+.addProduct-modalBg {
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(200, 200, 200, 0.4);
+  position: fixed;
+  top: 0;
+  left: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 99;
+}
+
+.addProduct-modalContainer {
+  overflow: scroll;
+  width: 80%;
+  height: auto;
+  max-height: 90vh;
+  border-radius: 12px;
+  background-color: #fcfcfc;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  display: flex;
+  flex-direction: column;
+  padding: 25px;
+  z-index: 199;
+}
+
+.addProduct-modalContainer .addProduct-titleCloseBtn {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.addProduct-modalContainer .addProduct-titleCloseBtn button {
+  background-color: transparent;
+  border: none;
+  font-size: 18px;
+  cursor: pointer;
+}
+
+.addProduct-modalTitle {
+  display: inline-block;
+  text-align: center;
+  margin: 16px 0;
+  font-weight: 200;
+}
+
+.addProduct-modalBody {
+  flex: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.125rem;
+  text-align: left;
+  border: blue 2px solid;
+}
+
+.addProduct-modalFooter {
+  flex: 20%;
+  display: flex;
+  gap: 50px;
+  justify-content: center;
+  align-items: center;
+}
+
+.addProduct-modalFooter button {
+  width: 150px;
+  height: 36px;
+  margin: 10px;
+  border: none;
+  background-color: cornflowerblue;
+  color: white;
+  border-radius: 8px;
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.addProductModalForm {
+    width: 100%;
+}
+
+.addProduct-inputGroupRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+}
+
+.addProduct-inputGroupRowSpec {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+
+.addProd-AddRemoveBtnGroup {
+  align-self: flex-end;
+  display: flex;
+  gap: 5px;
+  margin-right: 5px;
+  margin-bottom: 20px;
+}
+
+.addProduct-inputField {
+    width: 100%;
+    margin: 10px 0;
+}
+
+.addProduct-inputField label {
+    display: block;
+    width: 95%;
+    margin: 10px 0;
+    font-size: 14px;
+}
+
+.addProduct-inputField input {
+    display: block;
+    width: 95%;
+    margin: 10px 0;
+    font-size: 16px;
+    line-height: 1.5;
+    padding-left: 10px;
+}
+
+.addProduct-specSubTitle {
+    font-size: 16px;
+    color: #333;
+    
+}
+
+#addProd-addMoreButton {
+    background-color: green;
+    color: #fff;
+    height: 30px;
+    width: 70px;
+    border: none;
+    border-radius: 5px;
+}
+#addProd-removeButton {
+  background-color: red;
+    color: #fff;
+    height: 30px;
+    width: 70px;
+    border: none;
+    border-radius: 5px;
+}

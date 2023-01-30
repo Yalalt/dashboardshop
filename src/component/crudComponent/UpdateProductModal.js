@@ -20,11 +20,11 @@ const UpdateProductModal = (props) => {
     specification: [{}],
   });
 
-  const fetchProducts = async () => {
+  const fetchProducts = () => {
     try {
-      await axios.get(`${PRODUCTS_API_URL}/${selectedProdId}`).then((res) => setProduct(res.data));
+      axios.get(`${PRODUCTS_API_URL}/${selectedProdId}`).then((res) => setProduct(res.data));
     } catch (error) {
-      console.log("dB ogogdol unshihad aldaa garlaa!!!")
+      console.log("DB ogogdol unshihad aldaa garlaa!!!")
     }
   };
 

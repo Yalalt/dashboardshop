@@ -3,10 +3,12 @@ import axios from "axios";
 import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
+import AddProduct from "../crudComponent/AddProduct";
 
 const Products = () => {
   let [products, setProducts] = useState([]);
   let [openUpdateModal, setOpenUpdateModal] = useState(false);
+  let [openAddModal, setOpenAddModal] = useState(false);
   let [selectedProdId, setSelectedProdId] = useState("0");
 
   const openUpdateProductModal = (pId) => {
@@ -14,15 +16,21 @@ const Products = () => {
     setSelectedProdId(pId);
   };
 
+  const openAddProductModal = () => {
+    setOpenAddModal(true);
+  }
+
   const getAllProducts = () => {
     try {
       axios
-        .get("http://localhost:3007/products")
+        .get("http://localhost:3008/products")
         .then((response) => setProducts(response.data));
     } catch (error) {
       console.error(error);
     }
   };
+
+
 
   useEffect(() => {
     getAllProducts();
@@ -30,11 +38,16 @@ const Products = () => {
 
   return (
     <div className="products-bgColor">
-      {openUpdateModal && (
-        <UpdateProductModal
-          selectedProdId={selectedProdId}
-          setOpenUpdateModal={setOpenUpdateModal}
-        />
+      {
+      // openUpdateModal && (
+      //   <UpdateProductModal
+      //     selectedProdId={selectedProdId}
+      //     setOpenUpdateModal={setOpenUpdateModal}
+      //   />
+      // )
+      
+      openAddModal && (
+        <AddProduct />
       )}
       <div>
         <p>Бүтээгдэхүүн</p>
@@ -42,7 +55,7 @@ const Products = () => {
 
       <div className="products-controlBar">
         <div className="products-controlBar-addBtn">
-          <button variant="primary">+ Бараа нэмэх</button>
+          <button variant="primary" onClick={openAddProductModal}>+ Бараа нэмэх</button>
         </div>
         <div className="products-controlBar-filter">
           <div>

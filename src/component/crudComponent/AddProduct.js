@@ -1,10 +1,81 @@
 const { useState } = require("react");
 
 const AddProduct = () => {
-  let [specFieldNumber, setSpecFieldNumber] = useState(1);
-  let [addProductSpecRows, setAddProductSpecRows] = useState([]);
+  let [productSpecRows, setAddProductSpecRows] = useState([]);
 
-  const addSpecification = () => {};
+  let [specRows, setSpecRows] = useState(1);
+  let [rowsDisplay, setRowsDisplay] = useState([]);
+
+  const addRow = () => {
+    setSpecRows(specRows + 1);
+  };
+
+  const addSpecificationDisplay = () => {
+    addRow();
+    setRowsDisplay.push(
+      <div key={specRows} className="addProduct-inputGroupRow">
+        <div className="addProduct-inputField">
+          <label for={`addProductUnitLabel${specRows}`}>Хэмжих нэгж</label>
+          <input
+            type="text"
+            name={`addProductUnitValue${specRows}`}
+            placeholder="Хэмжих нэгж оруулна"
+          />
+        </div>
+        <div className="addProduct-inputField">
+          <label for={`addProductSizeLabel${specRows}`}>Хэмжих утга</label>
+          <input
+            type="text"
+            name={`addProductSizeValue${specRows}`}
+            placeholder="Хэмжих утга оруулна"
+          />
+        </div>
+      </div>
+    );
+  };
+
+  const allSpecificationDisplay = () => {
+    return rowsDisplay;
+  }
+
+  const oneSpecificationDisplay = () => {
+    return (<div key={specRows} className="addProduct-inputGroupRow">
+    <div className="addProduct-inputField">
+      <label for={`addProductUnitLabel${specRows}`}>Хэмжих нэгж</label>
+      <input
+        type="text"
+        name={`addProductUnitValue${specRows}`}
+        placeholder="Хэмжих нэгж оруулна"
+      />
+    </div>
+    <div className="addProduct-inputField">
+      <label for={`addProductSizeLabel${specRows}`}>Хэмжих утга</label>
+      <input
+        type="text"
+        name={`addProductSizeValue${specRows}`}
+        placeholder="Хэмжих утга оруулна"
+      />
+    </div>
+  </div>);
+  }
+
+  const displaySpecificRows = () => {
+    if (specRows > 1) {
+      allSpecificationDisplay();
+    } else {
+      oneSpecificationDisplay();
+    }
+  }
+
+  // Main fields change event handler
+  const eventHandlerMainFields = () => {
+
+  }
+
+  // Specification fields change event handler
+  const eventHandlerSpecificationFields = () => {
+
+  }
 
   return (
     <div>
@@ -34,29 +105,14 @@ const AddProduct = () => {
 
         <span>ҮЗҮҮЛЭЛТҮҮД</span>
 
-        <div className="addProduct-inputGroupRow">
-          <div className="addProduct-inputField">
-            <label for="labelAddProduct1">Хэмжих нэгж</label>
-            <input
-              type="text"
-              name="labelAddProduct1"
-              placeholder="Хэмжих нэгж оруулна"
-            />
-          </div>
-          <div className="addProduct-inputField">
-            <label for="valueAddProduct1">Хэмжих утга</label>
-            <input
-              type="text"
-              name="valueAddProduct1"
-              placeholder="Хэмжих утга оруулна"
-            />
-          </div>
-        </div>
-        {addProductSpecRows}
-        <input type="button" onClick={addSpecification}>
+        {/* Heden specs rows bgaag aruulah heseg */}
+        <
+        {displaySpecificRows}
+        <input type="button">
           Үзүүлэлт нэмэх
         </input>
       </div>
     </div>
   );
 };
+export default AddProduct;

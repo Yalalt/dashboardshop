@@ -3,11 +3,13 @@ import React, { useEffect, useState } from "react";
 import "../../style/updateProductModal.css";
 
 const UpdateProductModal = (props) => {
-  const API_HOST = "http://localhost:3007";
+  const API_HOST = "http://localhost:3008";
   const PRODUCTS_API_URL = `${API_HOST}/products`;
-  const USERS_API_URL = `${API_HOST}/users`;
+  // const USERS_API_URL = `${API_HOST}/users`;
 
   const { selectedProdId, setOpenUpdateModal } = props;
+
+  const [product, setProduct] = useState({});
 
   let [stateProduct, setStateProduct] = useState({
     id: "",
@@ -18,11 +20,11 @@ const UpdateProductModal = (props) => {
     specification: [{}],
   });
 
-  const fetchProducts = () => {
+  const fetchProducts = async () => {
     try {
-      axios.get(`${PRODUCTS_API_URL}`).then((res) => res.data);
+      await axios.get(`${PRODUCTS_API_URL}/${selectedProdId}`).then((res) => setProduct(res.data));
     } catch (error) {
-      console.log("dB ogogdol unshihad aldaa garlaa!!!");
+      console.log("dB ogogdol unshihad aldaa garlaa!!!")
     }
   };
 
@@ -35,19 +37,16 @@ const UpdateProductModal = (props) => {
     setOpenUpdateModal(false);
   };
 
-  const initializeProductData = async (products) => {
-    const retrievedProduct = products.filter(
-      (product) => product.pid === selectedProdId
-    );
-    console.log("Filtered product: ", retrievedProduct);
+  const initializeProductData = () => {
+    console.log("Inserted Products: ", product);
 
     setStateProduct({
-      id: retrievedProduct[0].pid,
-      prodName: retrievedProduct[0].name,
-      price: retrievedProduct[0].price,
-      balance: retrievedProduct[0].stock,
-      sale: retrievedProduct[0].sale,
-      specification: [...retrievedProduct[0].spec],
+      id: product[0].pid,
+      prodName: product[0].name,
+      price: product[0].price,
+      balance: product[0].stock,
+      sale: product[0].sale,
+      specification: [...product[0].spec],
     });
   };
 
@@ -85,10 +84,8 @@ const UpdateProductModal = (props) => {
   };
 
   useEffect(() => {
-    const data = fetchProducts();
-    console.log("Products axios==> ", data);
-
-    initializeProductData(data);
+    fetchProducts();
+    initializeProductData();
   }, []);
 
   return (

@@ -11,34 +11,21 @@ const ProductsController = () => {
   let [products, setProducts] = useState([]);
   let [singleProduct, setSingleProduct] = useState(null);
 
-  const getAllProductHandler = () => {
-    api
+  const getAllProductHandler = async () => {
+    const tempProducts = await api
       .get("/products")
-      .then((res) => {
-        console.log("in products api --> ", res.data);
-        setProducts(res.data);
-      })
+      .then((res) => res.data)
       .catch((error) => {
         console.error(error);
-      });
+      }).finally(() => {
+        setProducts(tempProducts);
+        console.log("in products api --> ", tempProducts);
+      })
   };
 
   console.log("Products awsanii ==> ", products);
 
-  const getSingleProductHandler = (id) => {
-    api
-      .get(`/product/${id}`)
-      .then((response) => setSingleProduct(response.data))
-      .catch((error) => {
-        console.log("Single Product aldaa garlaa ==> ", error.message);
-      });
-  };
 
-  const addProductHandler = (product) => {
-    api.post(`/product/add`, product).catch((error) => {
-      console.log("Error Add Product axios ==> ", error);
-    });
-  };
 
   const deleteProductHandler = (pid) => {
     console.log("Delete request dotor: ", pid);

@@ -1,14 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 
+const api = axios.create({
+  baseURL: "http://localhost:3008",
+});
+
 const Users = () => {
   let [users, setUsers] = useState([]);
 
-  const getUsersData = () => {
+  const getUsersData = async () => {
     try {
-      axios
-        .get("http://localhost:3007/users")
-        .then((response) => setUsers(response.data));
+      const tempUsers = await api
+        .get("/users")
+        .then((response) => response.data);
+        console.log("GET request send Users==> ", tempUsers);
+        setUsers(tempUsers[0]);
     } catch (error) {
       console.error("Error is axios: " + error);
     }

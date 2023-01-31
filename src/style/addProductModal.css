@@ -51,7 +51,6 @@
   align-items: center;
   font-size: 1.125rem;
   text-align: left;
-  border: blue 2px solid;
 }
 
 .addProduct-modalFooter {
@@ -141,4 +140,7 @@
     width: 70px;
     border: none;
     border-radius: 5px;
+}
+.addProduct-descTextArea {
+  resize: none;
 }

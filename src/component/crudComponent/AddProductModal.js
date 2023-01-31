@@ -68,21 +68,25 @@ const AddProductModal = (props) => {
 
     console.log("Uusgesenii daraa ==> ", newProduct);
 
+    const options = {
+      method: 'POST',
+      
+    };
+
     try {
-      axios.post(`${API_SERVER}/product/add`, newProduct).then(() => {
+      fetch(`${API_SERVER}/product/add`, newProduct).then(() => {
         console.log("POST added Product ...");
       });
     } catch (error) {
       console.log("Error uuslee in send POST axios===> ", error);
     }
-
-    onSave();
+    onCancel();
   };
 
   const onCancel = () => {
     closeAddProductModal();
   };
-  const onSave = () => {};
+  
 
   useEffect(() => {
     console.log("Before RUN ===> ", specRows);

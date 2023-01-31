@@ -1,5 +1,5 @@
 import NoMatch from "../component/NoMatch";
-import ProductsController from "../component/ProductsController";
+import Products from "../component/subComponent/Products";
 import Orders from "../component/subComponent/Orders";
 import Users from "../component/subComponent/Users";
 import Moderator from "../component/subComponent/Moderator";
@@ -15,7 +15,7 @@ function Main() {
       <Routes>
         <Route path="/" element={<HeaderLayout />}>
           <Route path="controlpanel" element={<ControlPanel />} />
-          <Route path="products" element={<ProductsController />} />
+          <Route path="products" element={<Products />} />
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
           <Route path="moderator" element={<Moderator />} />

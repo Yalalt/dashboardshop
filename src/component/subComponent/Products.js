@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
@@ -10,7 +10,26 @@ const Products = (props) => {
 
   let [selectedProdId, setSelectedProdId] = useState("0");
 
-  const { lists } = props;
+  let [products, setProducts] = useState([]);
+
+  const getAllProductHandler = () => {
+    fetch("http://localhost:3008/products")
+      .then((res) => {
+        if (res.ok) {
+          console.log("Success");
+          return res.json();
+        } else {
+          console.log("Not successful");
+        }
+      })
+      .then((data) => setProducts(data))
+      .catch((error) => {
+        console.error(error);
+      })
+      .finally(() => {
+        console.log("in products api --> ", products);
+      });
+  };
 
   // Display interface controller
   const openUpdateProductModal = (pId) => {
@@ -31,6 +50,10 @@ const Products = (props) => {
   const closeUpdateProductModal = () => {
     setOpenUpdateModal(false);
   };
+
+  useEffect(() => {
+    getAllProductHandler();
+  }, []);
 
   return (
     <div className="products-bgColor">
@@ -77,8 +100,8 @@ const Products = (props) => {
           </tr>
         </thead>
         <tbody>
-          {lists &&
-            lists.map((product, index) => (
+          {products &&
+            products.map((product, index) => (
               <Product
                 key={`prid${index}`}
                 index={product.pid}

@@ -21,11 +21,25 @@ const UpdateProductModal = (props) => {
   });
 
   const fetchProducts = () => {
-    try {
-      axios.get(`${PRODUCTS_API_URL}/${selectedProdId}`).then((res) => setProduct(res.data));
-    } catch (error) {
-      console.log("DB ogogdol unshihad aldaa garlaa!!!")
-    }
+    fetch(`${PRODUCTS_API_URL}/${selectedProdId}`, {
+      method: "POST",
+      headers: {
+        "Content-type": "application/json",
+      },
+      body: JSON.stringify({
+        id: "",
+        prodName: "",
+        price: "",
+        balance: "",
+        sale: "",
+        specification: [{}],
+      }),
+    })
+      .then((res) => res.json())
+      .then((data) => console.log(data))
+      .catch((error) => {
+        console.log("DB ogogdol unshihad aldaa garlaa!!!");
+      });
   };
 
   const onSave = () => {

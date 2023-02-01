@@ -3,31 +3,30 @@ import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
 import AddProductModal from "../crudComponent/AddProductModal";
+import axios from "axios";
 
 const Products = (props) => {
   let [openUpdateModal, setOpenUpdateModal] = useState(false);
   let [openAddModal, setOpenAddModal] = useState(false);
 
   let [selectedProdId, setSelectedProdId] = useState("0");
-
   let [products, setProducts] = useState([]);
 
   const getAllProductHandler = () => {
-    fetch("http://localhost:3008/products")
+    axios.get("http://localhost:3008/products")
       .then((res) => {
-        if (res.ok) {
+        if (res.status === 200) {
           console.log("Success");
-          return res.json();
+          return res.data;
         } else {
           console.log("Not successful");
         }
       })
-      .then((data) => setProducts(data))
+      .then((data) => {
+        console.log("before setState==> ", data)
+        setProducts(data)})
       .catch((error) => {
         console.error(error);
-      })
-      .finally(() => {
-        console.log("in products api --> ", products);
       });
   };
 

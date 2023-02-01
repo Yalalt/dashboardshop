@@ -40,16 +40,24 @@
   align-items: center;
 }
 table {
+  background-color: #e0e0e0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  border-left: #fff;
+  border-right: #fff;
   margin-top: 16px;
   width: 100%;
+  color: #333;
 }
 thead {
   background-color: #e0e0e0;
-  line-height: 2;
+  line-height: 3;
+  font-size: 14px;
 }
 tbody {
   background-color: #fff;
 }
+
 td {
   font-size: 14px;
   text-align: center;

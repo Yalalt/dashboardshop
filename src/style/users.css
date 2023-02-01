@@ -1,0 +1,73 @@
+.usersTableHeader {
+  background-color: #e0e0e0;
+  border-top-left-radius: 5px;
+  border-top-right-radius: 5px;
+  color: #333;
+}
+.usersFilterGroup Form {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.usersEditBtn {
+  background-color: transparent;
+  border: 1px dotted gray;
+  cursor: pointer;
+}
+.addUserButtonBg {
+  background-color: #003585;
+  padding: 5px 10px;
+  width: 200px;
+  color: #fff;
+  border-radius: 5px;
+  border: 1px solid transparent;
+}
+.searchUserInput {
+  width: 200px;
+  padding: 5px 10px;
+  border: none;
+  outline: 1px solid lightgrey;
+  background-color: #fff;
+  border-radius: 5px;
+}
+.usersCompMenuBtn {
+  position: relative;
+  padding: 0 8px;
+  background: transparent;
+  cursor: pointer;
+  border: none;
+}
+.userEditDropdownMenuButton {
+  background-color: transparent;
+  padding: 10px;
+  position: absolute;
+  color: #333;
+  right: 0;
+  bottom: 0;
+  width: 100px;
+  height: 40px;
+  z-index: 0;
+  display: none;
+  gap: 4px;
+  transition: all 0.3 ease-in;
+}
+.usersCompMenuBtn:hover .userEditDropdownMenuButton {
+  display: flex;
+  flex-flow: column;
+  z-index: 255;
+  transition: all 0.5s ease-in;
+}
+.userEditDropdownMenuButton button {
+  cursor: pointer;
+  background-color: #fff;
+  border: none;
+  border-bottom: 1px solid lightgray;
+  border-radius: 5px;
+  padding: 6px 16px;
+  box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.6);
+  transition: all 0.5s ease-in;
+}
+.userEditDropdownMenuButton button:hover {
+  background-color: #e0e0e0;
+  transition: all 0.3s ease-in;
+}

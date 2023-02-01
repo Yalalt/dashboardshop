@@ -25,11 +25,34 @@ const AddProductModal = (props) => {
     setSpecRows([...specRows, { unitValue: "", sizeValue: "" }]);
   };
 
+  const addProductSpecificSave = (e) => {
+    const unitValue = e.target.unitValue.value;
+    const sizeValue = e.target.sizeValue.value;
+
+    console.log(`Event handler unitValue = ${unitValue}`);
+    console.log(`Event handler sizeValue = ${sizeValue}`);
+  }
+
   // Specification fields change event handler
   const eventHandlerSpecificationFields = (e, index) => {
-    const { unit, value } = e.target;
+    e.preventDefault();
+
+    const unitValue = e.target.unitValue.value;
+    const sizeValue = e.target.sizeValue.value;
+
+    console.log(`Event handler unitValue = ${unitValue}`);
+    console.log(`Event handler sizeValue = ${sizeValue}`);
+
+    console.log(`Destruct 2 utga from Input unit = ${unitValue}; size = ${sizeValue}`);
+
     const list = [...specRows];
-    list[index][unit] = value;
+
+    list[index][unitValue] = sizeValue;
+    console.warn(`list[index] ==> list=>${list}; index=>${index}; (list[index]=> ${list[index]})`);
+    
+    console.warn(`unitValue=${unitValue}; list[index][unitValue] ==> ${list[index][unitValue]}`);
+
+    console.log(`==> sizeValue = ${sizeValue}`);
     setSpecRows(list);
   };
 
@@ -44,12 +67,15 @@ const AddProductModal = (props) => {
     e.preventDefault();
 
     const productId = genRandomHex(8);
-
+    
+    console.log("State is ==> ", specRows);
+    
     const specialsRows = specRows.map((field) => {
       let tempRow = {};
       tempRow[field.unitValue] = field.sizeValue;
       return tempRow;
     });
+    console.log("Out set SpecialsRows ==> ", specialsRows);
 
     const newProduct = {
       pid: productId,
@@ -59,23 +85,18 @@ const AddProductModal = (props) => {
       sale: e.target.prodSale.value,
       image: e.target.prodImageUrl.value,
       description: e.target.addProdDescription.value,
-      category: e.target.addProdHidden.value,
+      category: e.target.prodCategory.value,
       warranty: e.target.addProdWarranty.value,
       hidden: e.target.addProdHidden.value,
       prodCuDate: Date.now().toString(),
       spec: specialsRows,
     };
 
-    console.log("Uusgesenii daraa ==> ", newProduct);
-
-    const options = {
-      method: 'POST',
-      
-    };
+    console.log("Handle Event Function Submit; Object uusgesenii daraa newProduct ==> ", newProduct);
 
     try {
-      fetch(`${API_SERVER}/product/add`, newProduct).then(() => {
-        console.log("POST added Product ...");
+      axios.post(`${API_SERVER}/product/add`, newProduct).then(() => {
+        console.log("POST added new Product ...", newProduct);
       });
     } catch (error) {
       console.log("Error uuslee in send POST axios===> ", error);
@@ -89,7 +110,7 @@ const AddProductModal = (props) => {
   
 
   useEffect(() => {
-    console.log("Before RUN ===> ", specRows);
+    console.log(`Before RUN ===> unit => ${specRows.unitValue}; size => ${specRows.sizeValue}`);
   }, []);
 
   return (
@@ -204,7 +225,7 @@ const AddProductModal = (props) => {
                           name="unitValue"
                           placeholder="Хэмжих нэгж оруулна"
                           onChange={(e) =>
-                            eventHandlerSpecificationFields(e, index)
+                            eventHandlerSpecificationFields(e.target.value, index)
                           }
                         />
                       </div>
@@ -215,7 +236,7 @@ const AddProductModal = (props) => {
                           name="sizeValue"
                           placeholder="Хэмжих утга оруулна"
                           onChange={(e) =>
-                            eventHandlerSpecificationFields(e, index)
+                            eventHandlerSpecificationFields(e.target.value, index)
                           }
                         />
                       </div>
@@ -239,6 +260,7 @@ const AddProductModal = (props) => {
                           </button>
                         )}
                       </div>
+                      {/* <button name="addProductSpecificConfirm" type="button" onClick={(e) => addProductSpecificSave(e)} >Confirm save</button> */}
                     </div>
                   );
                 })}

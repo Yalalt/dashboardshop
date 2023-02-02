@@ -1,11 +1,11 @@
 import axios from "axios";
 import { useState } from "react";
 
-import "../../style/UserEditModalWindowStyle.css";
+import "../../style/UserAddModalWindowStyle.css";
 
-const UserEditModalWindow = (props) => {
-  const { user, closeEditUserModalWin } = props;
-  const [updateUser, setUpdateUser] = useState(user);
+const UserAddModalWindow = (props) => {
+  const { setUsers, closeUserAddModalHandler } = props;
+  const [updateUser, setUpdateUser] = useState();
 
   const genRandomHexUsersID = (size) =>
     [...Array(size)]
@@ -13,7 +13,7 @@ const UserEditModalWindow = (props) => {
       .join("");
 
   const onCancel = () => {
-    closeEditUserModalWin();
+    closeUserAddModalHandler();
   };
 
   const editUserEventHandler = (e) => {
@@ -31,9 +31,9 @@ const UserEditModalWindow = (props) => {
         : alert("Нууц үгнүүд ижил байх ёстой");
     let role = "client";
 
-    // Object or Array
-    let updateUser = {
-      uid: user.uid,
+    // NEW USER Object
+    let newUser = {
+      uid: "u" + genRandomHexUsersID(8),
       fname: fname,
       lname: lname,
       phone1: phone1,
@@ -43,38 +43,16 @@ const UserEditModalWindow = (props) => {
       password: password,
       role: role,
     };
+    console.log("NEW==> ", newUser);
 
-    // USER UID
-    if (user) {
+    if (newUser) {
       axios
-        .put(`http://localhost:3008/user/${user.uid}`, updateUser)
-        .then((res) => {
-          setUpdateUser(res.data.userData);
-          console.log("Send hiisnii daraa irsen data==> ", res);
-        });
-
-      console.log("new user obj:PUT:: ", updateUser);
+        .post("http://localhost:3008/user", newUser)
+        .then((res) => setUsers(res.data.userData));
     } else {
-      // NEW USER Object
-      let newUser = {
-        uid: "u" + genRandomHexUsersID(8),
-        fname: fname,
-        lname: lname,
-        phone1: phone1,
-        phone2: phone2,
-        address: address,
-        email: email,
-        password: password,
-        role: role,
-      };
-
-      axios
-        .post("http://localhost:3008/user/", newUser)
-        .then((res) => setUpdateUser(res.data.userData));
-
-      // UID backend tald deer check
-      console.log("new user obj:POST:: ", newUser);
+        console.log("Aldaa garlaa!!!");
     }
+    onCancel();
   };
 
   return (
@@ -95,7 +73,7 @@ const UserEditModalWindow = (props) => {
               <span>Хэрэглэгчийн мэдээлэл засварлах</span>
             </div>
             {/* UID */}
-            <div key={updateUser.uid} className="updateProd-ModalBody">
+            <div key={genRandomHexUsersID(4)} className="updateProd-ModalBody">
               <div className="updateUserModalForm">
                 <div className="updateUser-inputGroupRow">
                   <div className="updateUser-inputField">
@@ -103,7 +81,7 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="text"
                       name="lastName"
-                      defaultValue={updateUser.lname}
+                      placeholder="Овог"
                     />
                   </div>
                   <div className="updateUser-inputField">
@@ -111,7 +89,7 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="text"
                       name="firstName"
-                      defaultValue={updateUser.fname}
+                      placeholder="Нэр"
                     />
                   </div>
                 </div>
@@ -122,7 +100,7 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="text"
                       name="phoneNum1"
-                      defaultValue={updateUser.phone1}
+                      placeholder="Утасны дугаар"
                     />
                   </div>
                   <div className="updateUser-inputField">
@@ -130,7 +108,7 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="text"
                       name="phoneNum2"
-                      defaultValue={updateUser.phone2}
+                      placeholder="Утасны дугаар"
                     />
                   </div>
                 </div>
@@ -141,7 +119,7 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="text"
                       name="address"
-                      defaultValue={updateUser.address}
+                      placeholder="Хаяг"
                     />
                   </div>
                   <div className="updateUser-inputField">
@@ -149,7 +127,7 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="email"
                       name="email"
-                      defaultValue={updateUser.email}
+                      placeholder="И-мейл хаяг"
                     />
                   </div>
                 </div>
@@ -160,12 +138,12 @@ const UserEditModalWindow = (props) => {
                     <input
                       type="text"
                       name="password1"
-                      defaultValue={updateUser.password}
+                      placeholder="Нууц үгээ оруулна"
                     />
                   </div>
                   <div className="updateUser-inputField">
                     <label htmlFor="password2">Нууц үг давтан оруулна</label>
-                    <input type="text" name="password2" placeholder="******" />
+                    <input type="text" name="password2" placeholder="Нууц үгээ оруулна" />
                   </div>
                 </div>
               </div>
@@ -188,4 +166,4 @@ const UserEditModalWindow = (props) => {
     </div>
   );
 };
-export default UserEditModalWindow;
+export default UserAddModalWindow;

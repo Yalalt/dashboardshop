@@ -1,0 +1,101 @@
+.updateUser-modalBg {
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(200, 200, 200, 0.4);
+    position: fixed;
+    top: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  .updateUser-modalContainer {
+    overflow: scroll;
+    width: 700px;
+    height: auto;
+    max-height: 90vh;
+    border-radius: 12px;
+    background-color: #fcfcfc;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+  }
+  
+  .updateUser-modalContainer .updateUser-titleCloseBtn {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .updateUser-modalContainer .updateUser-titleCloseBtn button {
+    background-color: transparent;
+    border: none;
+    font-size: 18px;
+    cursor: pointer;
+  }
+  
+  .updateUser-ModalTitle {
+    display: inline-block;
+    text-align: center;
+    margin: 16px 0;
+    font-weight: 200;
+  }
+  
+  .updateUser-ModalBody {
+    flex: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.125rem;
+    text-align: left;
+  }
+  
+  .updateUser-ModalFooter {
+    flex: 20%;
+    display: flex;
+    gap: 50px;
+    justify-content: center;
+    align-items: center;
+  }
+  .updateUser-ModalFooter button {
+    width: 150px;
+    height: 36px;
+    margin: 10px;
+    border: none;
+    background-color: cornflowerblue;
+    color: white;
+    border-radius: 8px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  .updateUserModalForm {
+    width: 100%;
+  }
+  .updateUser-inputGroupRow {
+    display: flex;
+    justify-content: space-between;
+    gap: 30px;
+  }
+  
+  .updateUser-inputField {
+    width: 100%;
+    margin: 10px 0;
+  }
+  .updateUser-inputField label,
+  .updateUser-inputField input {
+    display: block;
+    width: 95%;
+    margin: 10px 0;
+    font-size: 14px;
+  }
+  .updateUser-inputField input {
+    line-height: 1.5;
+    font-size: 16px;
+    padding-left: 10px;
+  }
+  .updateUser-specSubTitle {
+    font-size: 16px;
+    color: gray;
+  }

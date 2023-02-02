@@ -1,23 +1,21 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Form } from "react-bootstrap";
+import { Button, Form } from "react-bootstrap";
 
 import "../../style/users.css";
 import UserEditModalWindow from "../crudComponent/UserEditModalWindow";
-
-const api = axios.create({
-  baseURL: "http://localhost:3008",
-});
+import UserAddModalWindow from "../crudComponent/UserAddModalWindow";
 
 const Users = () => {
   const [users, setUsers] = useState([]);
   const [user, setUser] = useState();
   const [openUserEditModalWindow, setOpenUserEditModalWindow] = useState(false);
+  const [openUserAddModal, setOpenUserAddModal] = useState(false);
 
   const getUsersData = () => {
     try {
-      api
-        .get("/users")
+      axios
+        .get("http://localhost:3008/users")
         .then((response) => response.data)
         .then((data) => {
           console.log("GET request receive Users==> ", data);
@@ -28,12 +26,9 @@ const Users = () => {
     }
   };
 
-  const deleteDropMenuEventHandler = (index) => {
-    api.delete(`/user/delete/${index}`).then((res) => {
-      
-      console.log("delete after user ==> ", res);
-
-      setUsers(res);
+  const deleteDropMenuEventHandler = (uid) => {
+    axios.delete(`http://localhost:3008/user/${uid}`).then((res) => {
+      setUsers(res.data.userData);
     });
   };
 
@@ -41,9 +36,17 @@ const Users = () => {
     setOpenUserEditModalWindow(true);
   };
 
+  const openUserAddModalHandler = () => {
+    setOpenUserAddModal(true);
+  };
+
+  const closeUserAddModalHandler = () => {
+    setOpenUserAddModal(false);
+  };
+
   const closeEditUserModalWin = () => {
     setOpenUserEditModalWindow(false);
-  } 
+  };
 
   useEffect(() => {
     getUsersData();
@@ -52,8 +55,14 @@ const Users = () => {
   return users ? (
     <div>
       <p>Хэрэглэгчид</p>
-
       <div className="usersFilterGroup">
+        <Button
+          variant="secondary"
+          className="usersCompAddUserButton"
+          onClick={openUserAddModalHandler}
+        >
+          Хэрэглэгч нэмэх
+        </Button>
         <Form>
           <Form.Select aria-label="Default select" className="addUserButtonBg">
             <option value="0">Бүгд</option>
@@ -69,7 +78,6 @@ const Users = () => {
           />
         </Form>
       </div>
-
       <table className="usersTableHeader">
         <thead>
           <tr>
@@ -121,7 +129,7 @@ const Users = () => {
                       <input
                         type="button"
                         value="Устгах"
-                        onClick={() => deleteDropMenuEventHandler(ind)}
+                        onClick={() => deleteDropMenuEventHandler(user.uid)}
                       />
                     </div>
                   </button>
@@ -131,7 +139,18 @@ const Users = () => {
           )}
         </tbody>
       </table>
-      {openUserEditModalWindow ? <UserEditModalWindow user={user} closeEditUserModalWin={closeEditUserModalWin} /> : null}
+      {(openUserEditModalWindow && (
+        <UserEditModalWindow
+          user={user}
+          closeEditUserModalWin={closeEditUserModalWin}
+        />
+      )) ||
+        (openUserAddModal && (
+          <UserAddModalWindow
+            setUsers={setUsers}
+            closeUserAddModalHandler={closeUserAddModalHandler}
+          />
+        ))}
     </div>
   ) : null;
 };

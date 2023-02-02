@@ -71,3 +71,13 @@
   background-color: #e0e0e0;
   transition: all 0.3s ease-in;
 }
+.usersCompAddUserButton {
+  margin: 10px 0;
+  padding: 5px 10px;
+  border-radius: 5px;
+  border: 1px solid #a2a2a2;
+  cursor: pointer;
+}
+.usersCompAddUserButton:hover {
+  background-color: #e2e2e2;
+}

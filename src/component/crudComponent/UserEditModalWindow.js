@@ -1,15 +1,15 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
 
+import "../../style/UserEditModalWindowStyle.css";
+
 const UserEditModalWindow = (props) => {
   const { user, closeEditUserModalWin } = props;
   const [updateUser, setUpdateUser] = useState(user);
 
   const onCancel = () => {
-    alert("Are you really exit");
     closeEditUserModalWin();
   };
-
 
   const editUserEventHandler = (e) => {
     e.preventDefault();
@@ -24,36 +24,49 @@ const UserEditModalWindow = (props) => {
     let role = "client";
 
     // Object or Array
-    let newUser = [fname, lname, phone1, phone2, address, email, password, role];
-        
-    console.log("Save Object:==> ", newUser);
+    let newUser = {
+      "uid": user.uid,
+      "fname": fname,
+      "lname": lname,
+      "phone1": phone1,
+      "phone2": phone2,
+      "address": address,
+      "email": email,
+      "password": password,
+      "role": role
+    };
+
+    console.log("Save Object:: newUser :==> ", newUser);
 
     // USER UID
-    if(user) {
-        axios.put(`http://localhost:3008/user/${user.uid}`, newUser)
+    if (user) {
+      axios
+        .put(`http://localhost:3008/user/${user.uid}`, newUser)
+        .then((res) => {
+          setUpdateUser(res.data.userData);
+          console.log("Send hiisnii daraa irsen data==> ", res);
+        });
+
+      console.log("new user obj:PUT:: ", newUser);
+    } else {
+      axios
+        .post("http://localhost:3008/user/", newUser)
         .then((res) => setUpdateUser(res));
 
-        console.log("new user obj::: ", newUser);
-    } else {
-        axios.post("http://localhost:3008/user/", newUser)
-        .then((res) => setUpdateUser(res));
-        
-        
-        // UID backend tald deer check
-        console.log("new user obj::: ", newUser);
+      // UID backend tald deer check
+      console.log("new user obj:POST:: ", newUser);
     }
   };
 
   useEffect(() => {
     console.log("User====> ", user);
-  }, [])
-  
+  }, []);
 
   return (
     <div>
-      <form onSubmit={editUserEventHandler}>
-        <div className="updateUser-modalBg">
-          <div className="updateUser-modalContainer">
+      <div className="updateUser-modalBg">
+        <div className="updateUser-modalContainer">
+          <form onSubmit={editUserEventHandler}>
             <div className="updateUser-titleCloseBtn">
               <button
                 onClick={() => {
@@ -71,19 +84,19 @@ const UserEditModalWindow = (props) => {
               <div className="updateUserModalForm">
                 <div className="updateUser-inputGroupRow">
                   <div className="updateUser-inputField">
-                    <label htmlFor="firstName">Нэр</label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      defaultValue={updateUser.fname}
-                    />
-                  </div>
-                  <div className="updateUser-inputField">
                     <label htmlFor="lastName">Овог</label>
                     <input
                       type="text"
                       name="lastName"
                       defaultValue={updateUser.lname}
+                    />
+                  </div>
+                  <div className="updateUser-inputField">
+                    <label htmlFor="firstName">Нэр</label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      defaultValue={updateUser.fname}
                     />
                   </div>
                 </div>
@@ -129,11 +142,15 @@ const UserEditModalWindow = (props) => {
                 <div className="updateUser-inputGroupRow">
                   <div className="updateUser-inputField">
                     <label htmlFor="password1">Нууц үг</label>
-                    <input type="text" name="password1" defaultValue={updateUser.password} />
+                    <input
+                      type="text"
+                      name="password1"
+                      defaultValue={updateUser.password}
+                    />
                   </div>
                   <div className="updateUser-inputField">
                     <label htmlFor="password2">Нууц үг давтан оруулна</label>
-                    <input type="text" name="password2" defaultValue="******" />
+                    <input type="text" name="password2" placeholder="******" />
                   </div>
                 </div>
               </div>
@@ -148,11 +165,11 @@ const UserEditModalWindow = (props) => {
               >
                 Гарах
               </button>
-              <button type="submit" >Хадгалах</button>
+              <button type="submit">Хадгалах</button>
             </div>
-          </div>
+          </form>
         </div>
-      </form>
+      </div>
     </div>
   );
 };

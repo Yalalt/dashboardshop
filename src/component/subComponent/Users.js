@@ -20,7 +20,7 @@ const Users = () => {
         .get("/users")
         .then((response) => response.data)
         .then((data) => {
-          console.log("GET request send Users==> ", data);
+          console.log("GET request receive Users==> ", data);
           setUsers(data);
         });
     } catch (error) {
@@ -38,7 +38,6 @@ const Users = () => {
   };
 
   const editDropMenuEventHandler = (index) => {
-    alert("Edit Clicked Menu" + index);
     setOpenUserEditModalWindow(true);
   };
 
@@ -111,23 +110,19 @@ const Users = () => {
                   <button className="usersCompMenuBtn">
                     :
                     <div className="userEditDropdownMenuButton">
-                      <button
+                      <input
                         type="button"
-                        value="edit"
+                        value="Засварлах"
                         onClick={() => {
                           editDropMenuEventHandler(ind);
                           setUser(user);
                         }}
-                      >
-                        Засварлах
-                      </button>
-                      <button
+                      />
+                      <input
                         type="button"
-                        value="delete"
+                        value="Устгах"
                         onClick={() => deleteDropMenuEventHandler(ind)}
-                      >
-                        Устгах
-                      </button>
+                      />
                     </div>
                   </button>
                 </td>

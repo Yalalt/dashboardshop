@@ -57,7 +57,7 @@
   z-index: 255;
   transition: all 0.5s ease-in;
 }
-.userEditDropdownMenuButton button {
+.userEditDropdownMenuButton input {
   cursor: pointer;
   background-color: #fff;
   border: none;
@@ -67,7 +67,7 @@
   box-shadow: 2px 2px 2px rgba($color: #000000, $alpha: 0.6);
   transition: all 0.5s ease-in;
 }
-.userEditDropdownMenuButton button:hover {
+.userEditDropdownMenuButton input:hover {
   background-color: #e0e0e0;
   transition: all 0.3s ease-in;
 }

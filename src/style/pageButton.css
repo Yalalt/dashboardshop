@@ -1,0 +1,54 @@
+.activeCurrentBtn {
+    background-color: rgb(245,245,245);
+    height: 50px;
+    width: 40px;
+    color: rgb(218,69,64);
+    border: none;
+    border-bottom: 2px solid rgb(218,69,64);
+    font-weight: 700;
+    box-sizing: border-box;
+    cursor: pointer;
+}
+
+.activeCurrentSiblingsBtn {
+    background-color: transparent;
+    height: 50px;
+    width: 40px;
+    color: #333;
+    border: none;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+    cursor: pointer;
+}
+.inactiveButton {
+    text-align: center;
+    padding-bottom: 0;
+    background-color: transparent;
+    height: 50px;
+    width: 40px;
+    border: none;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+    cursor: pointer;
+}
+.constButtons {
+    background-color: transparent;
+    width: 100px;
+    height: 50px;
+    color: #333;
+    border: none;
+    border-top: 2px solid #e0e0e0;
+    border-bottom: 2px solid #e0e0e0;
+    cursor: pointer;
+}
+.activeCurrentSiblingsBtn:hover,
+.activeCurrentBtn:hover,
+.constButtons:hover {
+    background-color: #e0e0e0;
+    border-bottom: 2px solid rgb(218,69,64);
+}
+.buttonsGroup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

@@ -1,4 +1,6 @@
 import React, { useState, useEffect } from "react";
+import { Pagination } from "react-bootstrap";
+import { Route, Routes } from "react-router-dom";
 import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
@@ -11,6 +13,8 @@ const Products = (props) => {
 
   let [selectedProdId, setSelectedProdId] = useState("0");
   let [products, setProducts] = useState([]);
+
+  const [currentNumber, setCurrentNumber] = useState(10);
 
   const getAllProductHandler = () => {
     axios.get("http://localhost:3008/products")
@@ -110,6 +114,10 @@ const Products = (props) => {
             ))}
         </tbody>
       </table>
+      <Routes>
+        <Route path="/page/:id" element={<Page setCurrentNumber={setCurrentNumber} />} />
+      </Routes>
+      <Pagination currentPage={currentNumber} setCurrentNumber={setCurrentNumber} />
       {(openUpdateModal ? (
         <UpdateProductModal
           selectedProdId={selectedProdId}

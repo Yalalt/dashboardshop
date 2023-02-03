@@ -16,6 +16,7 @@ function Main() {
         <Route path="/" element={<HeaderLayout />}>
           <Route path="controlpanel" element={<ControlPanel />} />
           <Route path="products" element={<Products />} />
+          <Route path="products/:id" element={<Products />} />
           <Route path="orders" element={<Orders />} />
           <Route path="users" element={<Users />} />
           <Route path="moderator" element={<Moderator />} />

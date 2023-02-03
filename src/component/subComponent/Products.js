@@ -7,6 +7,8 @@ import UpdateProductModal from "../crudComponent/UpdateProductModal";
 import AddProductModal from "../crudComponent/AddProductModal";
 import axios from "axios";
 
+const displayNumberProducts = 5;
+
 const Products = (props) => {
   let [openUpdateModal, setOpenUpdateModal] = useState(false);
   let [openAddModal, setOpenAddModal] = useState(false);
@@ -15,9 +17,16 @@ const Products = (props) => {
   let [products, setProducts] = useState([]);
 
   const [currentNumber, setCurrentNumber] = useState(10);
+  const [totalNumberProducts, setTotalNumberProducts] = useState();
+  const [currentPage ,setCurrentPage] = useState();
+  const [firstProductIndex, setFirstProductIndex] = useState();
+  const [lastProductIndex, setLastProductIndex] = useState();
+
+  const totalPageCount = Math.ceil(totalNumberProducts / displayNumberProducts);
 
   const getAllProductHandler = () => {
-    axios.get("http://localhost:3008/products")
+    axios
+      .get("http://localhost:3008/products")
       .then((res) => {
         if (res.status === 200) {
           console.log("Success");
@@ -27,8 +36,10 @@ const Products = (props) => {
         }
       })
       .then((data) => {
-        console.log("before setState==> ", data)
-        setProducts(data)})
+        console.log("before setState==> ", data);
+        setProducts(data);
+        setTotalNumberProducts(data.length);
+      })
       .catch((error) => {
         console.error(error);
       });
@@ -105,6 +116,7 @@ const Products = (props) => {
         <tbody>
           {products &&
             products.map((product, index) => (
+              
               <Product
                 key={`prid${index}`}
                 index={product.pid}
@@ -114,10 +126,10 @@ const Products = (props) => {
             ))}
         </tbody>
       </table>
-      <Routes>
-        <Route path="/page/:id" element={<Page setCurrentNumber={setCurrentNumber} />} />
-      </Routes>
-      <Pagination currentPage={currentNumber} setCurrentNumber={setCurrentNumber} />
+      <Pagination
+        currentPage={currentNumber}
+        setCurrentNumber={setCurrentNumber}
+      />
       {(openUpdateModal ? (
         <UpdateProductModal
           selectedProdId={selectedProdId}

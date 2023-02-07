@@ -15,7 +15,7 @@ const Products = () => {
   let totalNumberProducts = 0;
   let totalPageCount = 0;
 
-  console.log("aaa");
+  
   const [openUpdateModal, setOpenUpdateModal] = useState(false);
   const [openAddModal, setOpenAddModal] = useState(false);
   const [selectedProdId, setSelectedProdId] = useState("0");
@@ -27,6 +27,8 @@ const Products = () => {
   // Display interface controller
   const openUpdateProductModal = (pId, product) => {
     console.log("IIINNNNEEER Function: ", pId);
+    console.log("Products orj irsen ni --->", product);
+
     setProduct(product);
     setSelectedProdId(pId);
     closeAddProductModal();

@@ -10,7 +10,7 @@ import HeaderLayout from "../component/HeaderLayout";
 import { Routes, Route } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
-import { clippingParents } from "@popperjs/core";
+
 
 export const ProductsContext = createContext();
 
@@ -21,8 +21,6 @@ function Main() {
   useEffect(()=>{
     axios.get("http://localhost:3008/products").then(res => {
          if (res.status === 200) {
-      console.log("Success");
-      console.log("++++ Data ", res.data);
       setProducts1(res.data);
     } else {
       console.log("Not successful");

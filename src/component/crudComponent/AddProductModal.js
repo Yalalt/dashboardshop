@@ -6,7 +6,7 @@ import "../../style/addProductModal.css";
 const API_SERVER = "http://localhost:3008";
 
 const AddProductModal = (props) => {
-  let { closeAddProductModal } = props;
+  let { closeAddProductModal, setRefreshPage } = props;
 
   let [addProductsMainFields, setAddProductsMainFields] = useState([]);
   let [inputSize, setInputSize] = useState();
@@ -26,9 +26,9 @@ const AddProductModal = (props) => {
     inputObject[unitValue] = sizeValue;
     setSpecRows([...specRows, inputObject]);
 
-    console.log(`Event handler unitValue = ${unitValue}`);
-    console.log(`Event handler sizeValue = ${sizeValue}`);
-    console.log("minii object", inputObject);
+    // console.log(`Event handler unitValue = ${unitValue}`);
+    // console.log(`Event handler sizeValue = ${sizeValue}`);
+    // console.log("minii object", inputObject);
   };
 
   // Main fields change event handler
@@ -47,7 +47,7 @@ const AddProductModal = (props) => {
       category: e.target.prodCategory.value,
       warranty: e.target.addProdWarranty.value,
       hidden: e.target.addProdHidden.value,
-      prodCuDate: Date.now().toString(),
+      prodCuDate: new Date().toISOString().slice(0, 10),
       spec: specRows,
     };
 
@@ -58,7 +58,11 @@ const AddProductModal = (props) => {
 
     try {
       axios.post(`${API_SERVER}/product/`, newProduct).then((res) => {
+        if (res) {
+          console.log("Response: ", res.status);
+        }
         console.log("POST added new Product ...", newProduct);
+        setRefreshPage("Refresh");
       });
     } catch (error) {
       console.log("Error uuslee in send POST axios===> ", error);
@@ -176,14 +180,16 @@ const AddProductModal = (props) => {
 
                 <span className="addProduct-specSubTitle">ҮЗҮҮЛЭЛТҮҮД</span>
 
-                {specRows !== "" && specRows !== null ? specRows.map((spec) => {
-                  return (
-                    <label>
-                      <p>{Object.keys(spec)}</p>
-                      <input defaultValue={Object.values(spec)} />
-                    </label>
-                  );
-                }): null}
+                {specRows !== "" && specRows !== null
+                  ? specRows.map((spec) => {
+                      return (
+                        <div className="addProductSpecificList">
+                          <label>{Object.keys(spec)} : </label>
+                          <input defaultValue={Object.values(spec)} />
+                        </div>
+                      );
+                    })
+                  : null}
 
                 <div className="addProduct-inputGroupRowSpec">
                   <div className="addProduct-inputField">
@@ -204,14 +210,15 @@ const AddProductModal = (props) => {
                       onChange={(e) => setInputSize(e.target.value)}
                     />
                   </div>
-
-                  <button
-                    name="addProductSpecificConfirm"
-                    type="button"
-                    onClick={(e) => addProductSpecificSave(e)}
-                  >
-                    Confirm save
-                  </button>
+                  <div className="addProd-AddRemoveBtnGroup">
+                    <button
+                      name="addProductSpecificConfirm"
+                      type="button"
+                      onClick={(e) => addProductSpecificSave(e)}
+                    >
+                      Нэмэх
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>

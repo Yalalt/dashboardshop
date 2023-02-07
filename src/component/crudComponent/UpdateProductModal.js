@@ -3,40 +3,18 @@ import React, { useEffect, useState } from "react";
 import "../../style/updateProductModal.css";
 
 const UpdateProductModal = (props) => {
-  const API_HOST = "http://localhost:3008";
-  const PRODUCTS_API_URL = `${API_HOST}/products`;
-  // const USERS_API_URL = `${API_HOST}/users`;
+  const PRODUCTS_API_URL = "http://localhost:3008/product";
 
-  const { selectedProdId, setOpenUpdateModal } = props;
-
+  const { selectedProdId, closeUpdateProductModal } = props;
   const [product, setProduct] = useState({});
 
-  let [stateProduct, setStateProduct] = useState({
-    id: "",
-    prodName: "",
-    price: "",
-    balance: "",
-    sale: "",
-    specification: [{}],
-  });
-
   const fetchProducts = () => {
-    fetch(`${PRODUCTS_API_URL}/${selectedProdId}`, {
-      method: "POST",
-      headers: {
-        "Content-type": "application/json",
-      },
-      body: JSON.stringify({
-        id: "",
-        prodName: "",
-        price: "",
-        balance: "",
-        sale: "",
-        specification: [{}],
-      }),
-    })
-      .then((res) => res.json())
-      .then((data) => console.log(data))
+    axios
+      .get(`${PRODUCTS_API_URL}/${selectedProdId}`)
+      .then((res) => {
+        setProduct(res.data.userData);
+        console.log("res ==> ", res.data.userData);
+      })
       .catch((error) => {
         console.log("DB ogogdol unshihad aldaa garlaa!!!");
       });
@@ -48,59 +26,8 @@ const UpdateProductModal = (props) => {
   };
 
   const onCancel = () => {
-    setOpenUpdateModal(false);
+    closeUpdateProductModal();
   };
-
-  const initializeProductData = () => {
-    console.log("Inserted Products: ", product);
-
-    setStateProduct({
-      id: product[0].pid,
-      prodName: product[0].name,
-      price: product[0].price,
-      balance: product[0].stock,
-      sale: product[0].sale,
-      specification: [...product[0].spec],
-    });
-  };
-
-  const getSpecificationRows = () => {
-    const dataSpecRows = [];
-    console.log("Specific: --> ", stateProduct.specification);
-
-    stateProduct.specification.map((oneSpecific) => {
-      for (const [key, value] of Object.entries(oneSpecific)) {
-        dataSpecRows.push(
-          <div key={key} className="updateProduct-inputGroupRow">
-            <div className="updateProduct-inputField">
-              <label htmlFor="labelUpdateProduct1">Хэмжих нэгж</label>
-              <input
-                type="text"
-                name="labelUpdateProduct1"
-                placeholder="Хэмжих нэгж оруулна"
-                defaultValue={key}
-              />
-            </div>
-            <div className="updateProduct-inputField">
-              <label htmlFor="valueAddProduct1">Хэмжих утга</label>
-              <input
-                type="text"
-                name="valueAddProduct1"
-                placeholder="Хэмжих утга оруулна"
-                defaultValue={value}
-              />
-            </div>
-          </div>
-        );
-      }
-    });
-    return dataSpecRows;
-  };
-
-  useEffect(() => {
-    fetchProducts();
-    initializeProductData();
-  }, []);
 
   return (
     <div>
@@ -119,7 +46,7 @@ const UpdateProductModal = (props) => {
             <span>БҮТЭЭГДЭХҮҮН ЗАСВАРЛАХ</span>
           </div>
 
-          <div key={stateProduct.id} className="updateProd-ModalBody">
+          <div key={product.pid} className="updateProd-ModalBody">
             <div className="updateProductModalForm">
               <div className="updateProduct-inputGroupRow">
                 <div className="updateProduct-inputField">
@@ -128,7 +55,7 @@ const UpdateProductModal = (props) => {
                     type="text"
                     name="prodName"
                     placeholder="Барааны нэр"
-                    defaultValue={stateProduct.prodName}
+                    defaultValue={product.name}
                   />
                 </div>
                 <div className="updateProduct-inputField">
@@ -137,7 +64,7 @@ const UpdateProductModal = (props) => {
                     type="text"
                     name="prodPrice"
                     placeholder="Барааны үнэ"
-                    defaultValue={stateProduct.price}
+                    defaultValue={product.price}
                   />
                 </div>
               </div>
@@ -148,7 +75,7 @@ const UpdateProductModal = (props) => {
                   <input
                     type="text"
                     name="prodBalance"
-                    defaultValue={stateProduct.balance}
+                    defaultValue={product.stock}
                   />
                 </div>
                 <div className="updateProduct-inputField">
@@ -156,13 +83,42 @@ const UpdateProductModal = (props) => {
                   <input
                     type="text"
                     name="prodSale"
-                    defaultValue={stateProduct.sale}
+                    defaultValue={product.sale}
                   />
                 </div>
               </div>
 
               <span className="updateProduct-specSubTitle">ҮЗҮҮЛЭЛТҮҮД</span>
-              {getSpecificationRows()}
+
+              {
+              console.log("ssssss===> ", product.spec)
+
+              // product.spec.forEach((oneSpecific) => {
+              //   for (const [key, value] of Object.entries(oneSpecific)) {
+              //     <div key={key} className="updateProduct-inputGroupRow">
+              //       <div className="updateProduct-inputField">
+              //         <label htmlFor="labelUpdateProduct1">Хэмжих нэгж</label>
+              //         <input
+              //           type="text"
+              //           name="labelUpdateProduct1"
+              //           placeholder="Хэмжих нэгж оруулна"
+              //           defaultValue={key}
+              //         />
+              //       </div>
+              //       <div className="updateProduct-inputField">
+              //         <label htmlFor="valueAddProduct1">Хэмжих утга</label>
+              //         <input
+              //           type="text"
+              //           name="valueAddProduct1"
+              //           placeholder="Хэмжих утга оруулна"
+              //           defaultValue={value}
+              //         />
+              //       </div>
+              //     </div>;
+              //   }
+              // })
+              
+              }
             </div>
           </div>
 

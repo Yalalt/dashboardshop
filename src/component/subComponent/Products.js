@@ -1,28 +1,32 @@
 import React, { useState, useEffect } from "react";
-import { Pagination } from "react-bootstrap";
-import { Route, Routes } from "react-router-dom";
 import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
 import AddProductModal from "../crudComponent/AddProductModal";
+import Pagination from "./Pagination";
 import axios from "axios";
 
-const displayNumberProducts = 5;
 
 const Products = (props) => {
+  const displayNumberProducts = 5;
+  let totalNumberProducts = 0;
+  let totalPageCount = 0;
+
+
   let [openUpdateModal, setOpenUpdateModal] = useState(false);
   let [openAddModal, setOpenAddModal] = useState(false);
 
   let [selectedProdId, setSelectedProdId] = useState("0");
   let [products, setProducts] = useState([]);
 
-  const [currentNumber, setCurrentNumber] = useState(10);
-  const [totalNumberProducts, setTotalNumberProducts] = useState();
-  const [currentPage ,setCurrentPage] = useState();
-  const [firstProductIndex, setFirstProductIndex] = useState();
-  const [lastProductIndex, setLastProductIndex] = useState();
+  let [refreshPage, setRefreshPage] = useState("");
 
-  const totalPageCount = Math.ceil(totalNumberProducts / displayNumberProducts);
+  const [currentNumber, setCurrentNumber] = useState(1);
+  // const [totalNumberProducts, setTotalNumberProducts] = useState();
+  // const [currentPage ,setCurrentPage] = useState();
+  // const [firstProductIndex, setFirstProductIndex] = useState();
+  // const [lastProductIndex, setLastProductIndex] = useState();
+
 
   const getAllProductHandler = () => {
     axios
@@ -38,23 +42,27 @@ const Products = (props) => {
       .then((data) => {
         console.log("before setState==> ", data);
         setProducts(data);
-        setTotalNumberProducts(data.length);
+        totalNumberProducts = data.length;
+        totalPageCount = Math.ceil(totalNumberProducts / displayNumberProducts);
       })
       .catch((error) => {
         console.error(error);
+      }).finally(() => {
+        console.log("Total number products: ", totalNumberProducts);
+        console.log("Page number: ", totalPageCount);
       });
   };
 
   // Display interface controller
   const openUpdateProductModal = (pId) => {
-    setOpenUpdateModal(true);
-    setOpenAddModal(false);
     setSelectedProdId(pId);
+    closeAddProductModal();
+    setOpenUpdateModal(true);
   };
 
   const openAddProductModal = () => {
+    closeUpdateProductModal();
     setOpenAddModal(true);
-    setOpenUpdateModal(false);
   };
 
   const closeAddProductModal = () => {
@@ -116,18 +124,18 @@ const Products = (props) => {
         <tbody>
           {products &&
             products.map((product, index) => (
-              
               <Product
-                key={`prid${index}`}
+                key={`product${index}`}
                 index={product.pid}
                 product={product}
-                openUpdateProductModal={openUpdateProductModal}
+                openUpdateProductModal={openUpdateProductModal(index, product)}
               />
             ))}
         </tbody>
       </table>
       <Pagination
-        currentPage={currentNumber}
+        className="paginationContainer"
+        currentNumber={currentNumber? currentNumber : "5"}
         setCurrentNumber={setCurrentNumber}
       />
       {(openUpdateModal ? (
@@ -137,7 +145,7 @@ const Products = (props) => {
         />
       ) : null) ||
         (openAddModal ? (
-          <AddProductModal closeAddProductModal={closeAddProductModal} />
+          <AddProductModal refreshPage={refreshPage} setRefreshPage={setRefreshPage} closeAddProductModal={closeAddProductModal} />
         ) : null)}
     </div>
   );

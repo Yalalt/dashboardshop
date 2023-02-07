@@ -92,10 +92,10 @@
 
 .addProd-AddRemoveBtnGroup {
   align-self: flex-end;
-  display: flex;
-  gap: 5px;
-  margin-right: 5px;
   margin-bottom: 20px;
+}
+.addProd-AddRemoveBtnGroup button {
+  height: 28px;
 }
 
 .addProduct-inputField {
@@ -143,4 +143,22 @@
 }
 .addProduct-descTextArea {
   resize: none;
+}
+
+.addProductSpecificList {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.addProductSpecificList input {
+  font-size: 14px;
+  margin-top: 8px;
+  width: 60%;
+  border: 1px solid #e0e0e0;
+  background-color: #fff;
+}
+.addProductSpecificList label {
+  font-size: 14px;
+  margin-top: 8px;
+  width: 40%;
 }

@@ -2,67 +2,67 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import PageButton from "./PageButton";
 
-const Pagination = ({ currentPage, setCurrentNumber }) => {
+const Pagination = ({ currentNumber, setCurrentNumber }) => {
 
   return (
     <div className="buttonsGroup">
-      <Link to={`/page/${currentPage - 1}`}>
+      <Link to={`/page/${currentNumber - 1}`}>
         <PageButton
           name="ӨМНӨХ"
           btnClass={"constButtons"}
-          btnOnClick={() => setCurrentNumber(currentPage - 1)}
+          btnOnClick={() => setCurrentNumber(currentNumber - 1)}
         />
       </Link>
       <Link to={`/page/1`}>
-        {currentPage > 3 && (<PageButton
+        {currentNumber > 3 && (<PageButton
           name="1"
           btnClass={"inactiveButton"}
           btnOnClick={() => setCurrentNumber(1)}
         />)}
       </Link>
       <Link to={`/page/`}>
-        {currentPage > 4 && (
+        {currentNumber > 4 && (
           <PageButton name="." btnClass={"inactiveButton"} />
         )}
       </Link>
       <Link to={`/page/`}>
-        {currentPage > 3 && (
+        {currentNumber > 3 && (
           <PageButton name="." btnClass={"inactiveButton"} />
         )}
       </Link>
-      <Link to={`/page/${currentPage - 2}`}>
-        {currentPage > 2 && (<PageButton
-          name={currentPage - 2}
+      <Link to={`/page/${currentNumber - 2}`}>
+        {currentNumber > 2 && (<PageButton
+          name={currentNumber - 2}
           btnClass={"activeCurrentSiblingsBtn"}
-          btnOnClick={() => setCurrentNumber(currentPage - 2)}
+          btnOnClick={() => setCurrentNumber(currentNumber - 2)}
         />)}
       </Link>
-      <Link to={`/page/${currentPage - 1}`}>
-        {currentPage > 1 && (<PageButton
-          name={currentPage - 1}
+      <Link to={`/page/${currentNumber - 1}`}>
+        {currentNumber > 1 && (<PageButton
+          name={currentNumber - 1}
           btnClass={"activeCurrentSiblingsBtn"}
-          btnOnClick={() => setCurrentNumber(currentPage - 1)}
+          btnOnClick={() => setCurrentNumber(currentNumber - 1)}
         />)}
       </Link>
-      <Link to={`/page/${currentPage}`}>
+      <Link to={`/page/${currentNumber}`}>
         <PageButton
-          name={currentPage}
+          name={currentNumber}
           btnClass={"activeCurrentBtn"}
-          btnOnClick={() => setCurrentNumber(currentPage)}
+          btnOnClick={() => setCurrentNumber(currentNumber)}
         />
       </Link>
-      <Link to={`/page/${Number(currentPage) + 1}`}>
+      <Link to={`/page/${Number(currentNumber) + 1}`}>
         <PageButton
-          name={Number(currentPage) + 1}
+          name={Number(currentNumber) + 1}
           btnClass={"activeCurrentSiblingsBtn"}
-          btnOnClick={() => setCurrentNumber(currentPage + 1)}
+          btnOnClick={() => setCurrentNumber(currentNumber + 1)}
         />
       </Link>
-      <Link to={`/page/${Number(currentPage) + 2}`}>
+      <Link to={`/page/${Number(currentNumber) + 2}`}>
         <PageButton
-          name={Number(currentPage) + 2}
+          name={Number(currentNumber) + 2}
           btnClass={"activeCurrentSiblingsBtn"}
-          btnOnClick={() => setCurrentNumber(currentPage + 2)}
+          btnOnClick={() => setCurrentNumber(currentNumber + 2)}
         />
       </Link>
 
@@ -72,11 +72,11 @@ const Pagination = ({ currentPage, setCurrentNumber }) => {
       <Link to={`/page/`}>
         <PageButton name="." btnClass={"inactiveButton"} />
       </Link>
-      <Link to={`/page/${Number(currentPage) + 1}`}>
+      <Link to={`/page/${Number(currentNumber) + 1}`}>
         <PageButton
           name="ДАРААХ"
           btnClass={"constButtons"}
-          btnOnClick={() => setCurrentNumber(Number(currentPage) + 1)}
+          btnOnClick={() => setCurrentNumber(Number(currentNumber) + 1)}
         />
       </Link>
     </div>

@@ -31,7 +31,6 @@ const ControlPanel = () => {
     const newProductList = products.filter((product) => {
       return product.pid !== id;
     });
-
     setProducts(newProductList);
   };
 
@@ -43,10 +42,6 @@ const ControlPanel = () => {
 
     getAllProducts();
   }, []);
-
-  useEffect(() => {
-
-  })
 
   return (
     <div className="controlPanel-bgColor">

@@ -1,24 +1,14 @@
 import axios from "axios";
-import React, { useEffect, useState } from "react";
+import React, { useContext, useState } from "react";
 import "../../style/updateProductModal.css";
 
-const UpdateProductModal = (props) => {
-  const PRODUCTS_API_URL = "http://localhost:3008/product";
 
+
+const UpdateProductModal = (props) => {
   const { selectedProdId, closeUpdateProductModal } = props;
   const [product, setProduct] = useState({});
 
-  const fetchProducts = () => {
-    axios
-      .get(`${PRODUCTS_API_URL}/${selectedProdId}`)
-      .then((res) => {
-        setProduct(res.data.userData);
-        console.log("res ==> ", res.data.userData);
-      })
-      .catch((error) => {
-        console.log("DB ogogdol unshihad aldaa garlaa!!!");
-      });
-  };
+  const { products1, setProducts1 } = useContext(ProductsContext);
 
   const onSave = () => {
     // Some edit function here

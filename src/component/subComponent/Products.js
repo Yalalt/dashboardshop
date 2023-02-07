@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import "../../style/products.css";
 import Product from "./Product";
 import UpdateProductModal from "../crudComponent/UpdateProductModal";
@@ -6,55 +6,28 @@ import AddProductModal from "../crudComponent/AddProductModal";
 import Pagination from "./Pagination";
 import axios from "axios";
 
+import { ProductsContext } from "../../pages/Main";
 
-const Products = (props) => {
+const Products = () => {
+  const { products1, setProducts1 } = useContext(ProductsContext);
+
   const displayNumberProducts = 5;
   let totalNumberProducts = 0;
   let totalPageCount = 0;
 
+  console.log("aaa");
+  const [openUpdateModal, setOpenUpdateModal] = useState(false);
+  const [openAddModal, setOpenAddModal] = useState(false);
+  const [selectedProdId, setSelectedProdId] = useState("0");
+  const [product, setProduct] = useState();
 
-  let [openUpdateModal, setOpenUpdateModal] = useState(false);
-  let [openAddModal, setOpenAddModal] = useState(false);
-
-  let [selectedProdId, setSelectedProdId] = useState("0");
-  let [products, setProducts] = useState([]);
-
-  let [refreshPage, setRefreshPage] = useState("");
-
+  const [refreshPage, setRefreshPage] = useState("");
   const [currentNumber, setCurrentNumber] = useState(1);
-  // const [totalNumberProducts, setTotalNumberProducts] = useState();
-  // const [currentPage ,setCurrentPage] = useState();
-  // const [firstProductIndex, setFirstProductIndex] = useState();
-  // const [lastProductIndex, setLastProductIndex] = useState();
-
-
-  const getAllProductHandler = () => {
-    axios
-      .get("http://localhost:3008/products")
-      .then((res) => {
-        if (res.status === 200) {
-          console.log("Success");
-          return res.data;
-        } else {
-          console.log("Not successful");
-        }
-      })
-      .then((data) => {
-        console.log("before setState==> ", data);
-        setProducts(data);
-        totalNumberProducts = data.length;
-        totalPageCount = Math.ceil(totalNumberProducts / displayNumberProducts);
-      })
-      .catch((error) => {
-        console.error(error);
-      }).finally(() => {
-        console.log("Total number products: ", totalNumberProducts);
-        console.log("Page number: ", totalPageCount);
-      });
-  };
 
   // Display interface controller
-  const openUpdateProductModal = (pId) => {
+  const openUpdateProductModal = (pId, product) => {
+    console.log("IIINNNNEEER Function: ", pId);
+    setProduct(product);
     setSelectedProdId(pId);
     closeAddProductModal();
     setOpenUpdateModal(true);
@@ -72,10 +45,6 @@ const Products = (props) => {
   const closeUpdateProductModal = () => {
     setOpenUpdateModal(false);
   };
-
-  useEffect(() => {
-    getAllProductHandler();
-  }, []);
 
   return (
     <div className="products-bgColor">
@@ -122,30 +91,37 @@ const Products = (props) => {
           </tr>
         </thead>
         <tbody>
-          {products &&
-            products.map((product, index) => (
+          {products1 &&
+            products1.map((product, index) => (
               <Product
                 key={`product${index}`}
                 index={product.pid}
                 product={product}
-                openUpdateProductModal={openUpdateProductModal(index, product)}
+                openUpdateProductModal={() =>
+                  openUpdateProductModal(index, product)
+                }
               />
             ))}
         </tbody>
       </table>
       <Pagination
         className="paginationContainer"
-        currentNumber={currentNumber? currentNumber : "5"}
+        currentNumber={currentNumber ? currentNumber : "5"}
         setCurrentNumber={setCurrentNumber}
       />
       {(openUpdateModal ? (
         <UpdateProductModal
+          product={product}
           selectedProdId={selectedProdId}
           closeUpdateProductModal={closeUpdateProductModal}
         />
       ) : null) ||
         (openAddModal ? (
-          <AddProductModal refreshPage={refreshPage} setRefreshPage={setRefreshPage} closeAddProductModal={closeAddProductModal} />
+          <AddProductModal
+            refreshPage={refreshPage}
+            setRefreshPage={setRefreshPage}
+            closeAddProductModal={closeAddProductModal}
+          />
         ) : null)}
     </div>
   );

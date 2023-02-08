@@ -7,6 +7,7 @@ const UpdateProductModal = (props) => {
   const [inputUnit, setInputUnit] = useState([]);
   const [inputSize, setInputSize] = useState([]);
   const [specRows, setSpecRows] = useState([]);
+  const [localdom, setLocaldom] = useState([]);
 
   console.log(")0_0)/  0>0)//===> START");
 
@@ -14,22 +15,22 @@ const UpdateProductModal = (props) => {
     e.preventDefault();
 
     let updateSpecific = [];
-// Form deer input variableiin nersiig
-// dawtaltaar huwisagchaas utgiig ni awah!!!!!
-// 
+    // Form deer input variableiin nersiig
+    // dawtaltaar huwisagchaas utgiig ni awah!!!!!
+    //
     product.spec.map((unitSize, index) =>
       Object.entries(unitSize).map(([nokey, novalue], subIndex) => {
         const newUnitSizeValue = {};
-        const unitValue = e.target.unitValueUpdateProduct + index + subIndex + value;
-        const sizeValue = `${e}.${target}.sizeValueUpdateProduct${index}_${subIndex}.${value}`;
+        console.log("index variab ref:==>", index);
+        const unitValue = e.target.unitValueUpdateProduct.localdom[index].value;
+        const sizeValue = e.target.sizeValueUpdateProduct.localdom[index].value;
         newUnitSizeValue[unitValue] = sizeValue;
         updateSpecific.push(newUnitSizeValue);
       })
     );
 
     console.log("Updated Specif:===> ", updateSpecific);
-      
-    
+
     const editedProduct = {};
   };
 
@@ -102,6 +103,8 @@ const UpdateProductModal = (props) => {
                 {product.spec.map((oneSpecific, index) => {
                   return Object.entries(oneSpecific).map(
                     ([key, value], subIndex) => {
+                      setLocaldom([...localdom, `${index}_${subIndex}`]);
+
                       return (
                         <div
                           key={`${index}-${subIndex}`}

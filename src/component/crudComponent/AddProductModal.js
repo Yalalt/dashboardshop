@@ -6,7 +6,7 @@ import "../../style/addProductModal.css";
 const API_SERVER = "http://localhost:3008";
 
 const AddProductModal = (props) => {
-  let { closeAddProductModal, setRefreshPage } = props;
+  let { closeAddProductModal } = props;
 
   let [addProductsMainFields, setAddProductsMainFields] = useState([]);
   let [inputSize, setInputSize] = useState();
@@ -62,7 +62,7 @@ const AddProductModal = (props) => {
           console.log("Response: ", res.status);
         }
         console.log("POST added new Product ...", newProduct);
-        setRefreshPage("Refresh");
+      
       });
     } catch (error) {
       console.log("Error uuslee in send POST axios===> ", error);

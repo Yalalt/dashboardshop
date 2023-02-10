@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useRef, useState } from "react";
 import "../../style/updateProductModal.css";
 
 const UpdateProductModal = (props) => {
@@ -9,29 +9,16 @@ const UpdateProductModal = (props) => {
   const [specRows, setSpecRows] = useState([]);
   const [localdom, setLocaldom] = useState([]);
 
+
   console.log(")0_0)/  0>0)//===> START");
 
   const editProductEventHandler = (e) => {
     e.preventDefault();
 
-    let updateSpecific = [];
-    // Form deer input variableiin nersiig
-    // dawtaltaar huwisagchaas utgiig ni awah!!!!!
-    //
-    product.spec.map((unitSize, index) =>
-      Object.entries(unitSize).map(([nokey, novalue], subIndex) => {
-        const newUnitSizeValue = {};
-        console.log("index variab ref:==>", index);
-        const unitValue = e.target.unitValueUpdateProduct.localdom[index].value;
-        const sizeValue = e.target.sizeValueUpdateProduct.localdom[index].value;
-        newUnitSizeValue[unitValue] = sizeValue;
-        updateSpecific.push(newUnitSizeValue);
-      })
-    );
 
-    console.log("Updated Specif:===> ", updateSpecific);
-
-    const editedProduct = {};
+    console.log("ene yyg yu we", e.target);
+  
+   
   };
 
   const onCancel = () => {
@@ -103,11 +90,14 @@ const UpdateProductModal = (props) => {
                 {product.spec.map((oneSpecific, index) => {
                   return Object.entries(oneSpecific).map(
                     ([key, value], subIndex) => {
-                      setLocaldom([...localdom, `${index}_${subIndex}`]);
+                      // let rowSpecValues = {};
+                      // rowSpecValues[key] = value;
+                      // setSpecRows([...specRows, rowSpecValues]);
+
 
                       return (
                         <div
-                          key={`${index}-${subIndex}`}
+                          key={`${index}_${subIndex}`}
                           className="updateProduct-inputGroupRow"
                         >
                           <div className="updateProduct-inputField">
@@ -115,8 +105,9 @@ const UpdateProductModal = (props) => {
                               Хэмжих нэгж
                             </label>
                             <input
+                              
                               type="text"
-                              name={`unitValueUpdateProduct${index}_${subIndex}`}
+                              name={`unitValueUpdateProduct${index}`}
                               placeholder="Хэмжих нэгж оруулна"
                               defaultValue={key ? key : ""}
                             />
@@ -126,8 +117,9 @@ const UpdateProductModal = (props) => {
                               Хэмжих утга
                             </label>
                             <input
+                              
                               type="text"
-                              name={`sizeValueUpdateProduct${index}_${subIndex}`}
+                              name={`sizeValueUpdateProduct${index}`}
                               placeholder="Хэмжих утга оруулна"
                               defaultValue={value ? value : ""}
                             />

@@ -21,7 +21,7 @@ const Products = () => {
   const [selectedProdId, setSelectedProdId] = useState("0");
   const [product, setProduct] = useState();
 
-  const [refreshPage, setRefreshPage] = useState("");
+  
   const [currentNumber, setCurrentNumber] = useState(1);
 
   // Display interface controller
@@ -120,8 +120,6 @@ const Products = () => {
       ) : null) ||
         (openAddModal ? (
           <AddProductModal
-            refreshPage={refreshPage}
-            setRefreshPage={setRefreshPage}
             closeAddProductModal={closeAddProductModal}
           />
         ) : null)}

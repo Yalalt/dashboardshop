@@ -3,15 +3,12 @@ import { useEffect, useState } from "react";
 
 import "../../style/addProductModal.css";
 
-const API_SERVER = "http://localhost:3008";
-
 const AddProductModal = (props) => {
   let { closeAddProductModal } = props;
 
   let [addProductsMainFields, setAddProductsMainFields] = useState([]);
   let [inputSize, setInputSize] = useState();
   let [inputUnit, setInputUnit] = useState();
-
   let [specRows, setSpecRows] = useState([]);
 
   const genRandomHex = (size) =>
@@ -25,19 +22,13 @@ const AddProductModal = (props) => {
     const sizeValue = inputSize;
     inputObject[unitValue] = sizeValue;
     setSpecRows([...specRows, inputObject]);
-
-    // console.log(`Event handler unitValue = ${unitValue}`);
-    // console.log(`Event handler sizeValue = ${sizeValue}`);
-    // console.log("minii object", inputObject);
   };
 
   // Main fields change event handler
   const eventHandlerMainFields = (e) => {
     e.preventDefault();
 
-    const productId = genRandomHex(8);
     const newProduct = {
-      pid: productId,
       name: e.target.prodName.value,
       price: e.target.prodPrice.value,
       stock: e.target.prodBalance.value,
@@ -45,9 +36,6 @@ const AddProductModal = (props) => {
       image: e.target.prodImageUrl.value,
       description: e.target.addProdDescription.value,
       category: e.target.prodCategory.value,
-      warranty: e.target.addProdWarranty.value,
-      hidden: e.target.addProdHidden.value,
-      prodCuDate: new Date().toISOString().slice(0, 10),
       spec: specRows,
     };
 
@@ -57,12 +45,11 @@ const AddProductModal = (props) => {
     );
 
     try {
-      axios.post(`${API_SERVER}/product/`, newProduct).then((res) => {
+      axios.post(`http://localhost:3008/product/`, newProduct).then((res) => {
         if (res) {
           console.log("Response: ", res.status);
         }
         console.log("POST added new Product ...", newProduct);
-      
       });
     } catch (error) {
       console.log("Error uuslee in send POST axios===> ", error);
@@ -167,13 +154,6 @@ const AddProductModal = (props) => {
                       <option value="telescope">Телескоп</option>
                       <option value="appliance">Гэр ахуйн</option>
                       <option value="console">Консол тоглоом</option>
-                    </select>
-                  </div>
-                  <div className="addProduct-inputField">
-                    <label for="addProdHidden">Вэб хуудсанд харуулах</label>
-                    <select name="addProdHidden">
-                      <option value="true">Харуулах</option>
-                      <option value="false">Нуух</option>
                     </select>
                   </div>
                 </div>

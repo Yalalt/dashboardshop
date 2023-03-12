@@ -11,31 +11,29 @@ import { Routes, Route } from "react-router-dom";
 import { createContext, useEffect, useState } from "react";
 import axios from "axios";
 
-
 export const ProductsContext = createContext();
 
 function Main() {
-  const [products1, setProducts1] = useState();
+  const [products, setProducts] = useState();
 
-
-  useEffect(()=>{
-    axios.get("http://localhost:3008/products").then(res => {
-         if (res.status === 200) {
-      setProducts1(res.data);
-    } else {
-      console.log("Not successful");
-    }
-    })
-  }, [])
+  useEffect(() => {
+    axios.get("http://localhost:3008/product").then((res) => {
+      if (res.status) {
+        setProducts(res.data);
+      } else {
+        console.log("Not successful");
+      }
+    });
+  }, []);
 
   return (
     <div>
-      <ProductsContext.Provider value={{products1, setProducts1}}>
+      <ProductsContext.Provider value={{ products, setProducts }}>
         <Routes>
           <Route path="/" element={<HeaderLayout />}>
             <Route path="controlpanel" element={<ControlPanel />} />
-            <Route path="products" element={<Products />} />
-            <Route path="products/:id" element={<Products />} />
+            <Route path="product" element={<Products />} />
+            <Route path="product/:id" element={<Products />} />
             <Route path="orders" element={<Orders />} />
             <Route path="users" element={<Users />} />
             <Route path="moderator" element={<Moderator />} />
